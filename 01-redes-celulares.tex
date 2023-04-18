@@ -29,7 +29,7 @@ As redes de computadores revolucionaram o mundo em que vivemos. Através delas, 
 
 Atualmente, encontra-se aparelhos computacionais como \textit{desktops}/PCs, \textit{laptops}/notebooks, celulares \textit{smartphones} e \textit{tablets} que fazem uso dessas redes. Elas estão geralmente disponíveis em duas modalidades: redes cabeadas e redes sem fio. Alguns aparelhos podem usar mais de uma modalidade para suas comunicações.
 
-No que diz respeito às redes sem fio, os principais representantes são o Bluetooth, o Wi-Fi e as redes móveis celulares. O Bluetooth, como uma rede de abrangência PAN (Personal Area Network), tem alcance reduzido em comparação às demais. O Wi-Fi, como uma rede de abrangência LAN/WLAN (Local Area Network/Wireless Local Area Network), tem alcance maior que o primeiro porém em uma área delimitada não tão grande. A rede móvel de celular, como uma rede de abrangência WAN/WWAN (Wide Area Network/Wireles Wide Area Network)\cite{wwan}, tem alcance maior que as anteriores.
+No que diz respeito às redes sem fio, os principais representantes são o Bluetooth, o Wi-Fi e as redes móveis celulares. O Bluetooth, como uma rede de abrangência PAN (Personal Area Network), tem alcance reduzido em comparação às demais. O Wi-Fi, como uma rede de abrangência LAN/WLAN (Local Area Network/Wireless Local Area Network), tem alcance maior que o primeiro porém em uma área delimitada não tão grande. A rede móvel de celular, como uma rede de abrangência WAN/WWAN (Wide Area Network/Wireles Wide Area Network) \cite{wwan}, tem alcance maior que as anteriores.
 
 Ao longo do tempo, as redes móveis de celulares foram evoluindo até o momento atual. A primeira geração, fazia uso apenas de voz em formato analógico. A segunda geração, ainda fazia uso de voz porém em formato digital. A terceira geração, começou a disponibilizar dados além da transmissão de voz. A quarta geração, teve ... . A quinta geração, a atual, começou a ter ... . O momento atual também é de discussões sobre mudanças na quinta geração para que uma possível sexta geração incremente serviços a esse tipo de rede.
 
@@ -43,17 +43,30 @@ O restante do documento está assim dividido: a próxima seção aborda conceito
 	\item Handover/handoff
 	\item Pontos em comum
 	\item Aparelhos, antenas, centrais de comutação
+	\item Canais
 \end{itemize}
 
 \section*{1G - Geração 1}
 \label{1g}
 
-Por isso, quero lhe dê Zé. Apresentei a pistola. Cebolas alhos. E afanar as minhas três Terezas. Escrevi porque quero tonto. Em sua beca. Para príncipe da condessa. Para príncipe da condessa. Para príncipe da condessa. E afanar as minhas três Terezas.
+%Por isso, quero lhe dê Zé. Apresentei a pistola. Cebolas alhos. E afanar as minhas três Terezas. Escrevi porque quero tonto. Em sua beca. Para príncipe da condessa. Para príncipe da condessa. Para príncipe da condessa. E afanar as minhas três Terezas.
+
+Nos anos 1980, surgiu a primeira geração de rede móvel para a telefonia celular através da American Telephone and Telegraph (AT\&T) e foi chamada de Advanced Mobile Phone Service (AMPS) \cite{tcc1}. Como não havia um padrão definido para os diferentes países, na mesma época haviam sistemas concorrentes, como o da Nippon Telegraph and Telephone (NTT) no Japão; o da Nordic Mobile Telephone (NMT) nos países nórdicos; e o da Total Access Communication System (TACS) no Reino Unido; além de outros \cite{wiki-1g-br, wiki-1g-en}. No Brasil, foi adotado o padrão AMPS \cite{tcc2}.
+
+Conhecida como 1G, essa primeira geração teve um desenvolvimento lento. Nas Américas, após o lançamento da tecnologia, as expansões para os demais países tiveram intervalos de um a dois anos \cite{repor1}. Tecnicamente, usava multiplexação de acesso FDMA; células com diâmetros de 10 km a 20 km \cite{aula3}; voz em formato analógico e faixa de frequência da ordem de 800 MHz.
+
+Para fazer uma ligação, o usuário deve digitar o número desejado e apertar em ``chamar''. O celular então envia para a estação base seu próprio número e também o do celular de destino. A estação base, por sua vez, envia os dados recebidos para a central de comutação. Essa última escolhe uma frequência livre disponível para a chamada e retorna para o telefone.
+
+Na outra ponta, o destino deve ficar em modo de escuta. A central de comutação, ao receber o pedido de comunicação, repassa a necessidade para a estação base do destino; e esta repassa para o telefone chamado  usando o canal de \textit{paging}. O destino retorna o aceite através do canal de acesso e a estação base informa o canal da ligação, para só então o telefone tocar.
+
+%possuíam inúmeros problemas como limitação de capacidade, terminais de usuários grandes e pesados, incompatibilidade entre sistemas, interfaces não padronizadas, baixa qualidade nas ligações e, principalmente, nenhum tipo de segurança na transmissão das informações. 
 
 \section*{2G - Geração 2}
 \label{2g}
 
-Para príncipe da condessa. Sorris a usar dentes. Eu tenho que pegar teu bruto. Eu tenho que pegar teu bruto. Eu tenho que pegar teu bruto. Eu tenho que pegar teu bruto. Cebolas alhos. E afanar as minhas três Terezas. Em sua beca. Por isso, quero lhe dê Zé.
+%Para príncipe da condessa. Sorris a usar dentes. Eu tenho que pegar teu bruto. Eu tenho que pegar teu bruto. Eu tenho que pegar teu bruto. Eu tenho que pegar teu bruto. Cebolas alhos. E afanar as minhas três Terezas. Em sua beca. Por isso, quero lhe dê Zé.
+
+Nos anos 1980, surgiu a primeira geração de rede móvel para a telefonia celular
 
 \section*{3G - Geração 3}
 \label{3g}
