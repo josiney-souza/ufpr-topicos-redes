@@ -49,8 +49,6 @@ O restante do documento está assim dividido: a próxima seção aborda conceito
 \section*{1G - Geração 1}
 \label{1g}
 
-%Por isso, quero lhe dê Zé. Apresentei a pistola. Cebolas alhos. E afanar as minhas três Terezas. Escrevi porque quero tonto. Em sua beca. Para príncipe da condessa. Para príncipe da condessa. Para príncipe da condessa. E afanar as minhas três Terezas.
-
 Nos anos 1980, surgiu a primeira geração de rede móvel para a telefonia celular através da American Telephone and Telegraph (AT\&T) e foi chamada de Advanced Mobile Phone Service (AMPS) \cite{tcc1}. Como não havia um padrão definido para os diferentes países, na mesma época haviam sistemas concorrentes, como o da Nippon Telegraph and Telephone (NTT) no Japão; o da Nordic Mobile Telephone (NMT) nos países nórdicos; e o da Total Access Communication System (TACS) no Reino Unido; além de outros \cite{wiki-1g-br, wiki-1g-en}. No Brasil, foi adotado o padrão AMPS \cite{tcc2}.
 
 Conhecida como 1G, essa primeira geração teve um desenvolvimento lento. Nas Américas, após o lançamento da tecnologia, as expansões para os demais países tiveram intervalos de um a dois anos \cite{repor1}. Tecnicamente, usava multiplexação de acesso FDMA; células com diâmetros de 10 km a 20 km \cite{aula3}; voz em formato analógico e faixa de frequência da ordem de 800 MHz.
@@ -59,14 +57,37 @@ Para fazer uma ligação, o usuário deve digitar o número desejado e apertar e
 
 Na outra ponta, o destino deve ficar em modo de escuta. A central de comutação, ao receber o pedido de comunicação, repassa a necessidade para a estação base do destino; e esta repassa para o telefone chamado  usando o canal de \textit{paging}. O destino retorna o aceite através do canal de acesso e a estação base informa o canal da ligação, para só então o telefone tocar.
 
-%possuíam inúmeros problemas como limitação de capacidade, terminais de usuários grandes e pesados, incompatibilidade entre sistemas, interfaces não padronizadas, baixa qualidade nas ligações e, principalmente, nenhum tipo de segurança na transmissão das informações. 
-
 \section*{2G - Geração 2}
 \label{2g}
 
-%Para príncipe da condessa. Sorris a usar dentes. Eu tenho que pegar teu bruto. Eu tenho que pegar teu bruto. Eu tenho que pegar teu bruto. Eu tenho que pegar teu bruto. Cebolas alhos. E afanar as minhas três Terezas. Em sua beca. Por isso, quero lhe dê Zé.
+Na década de 90 e anos 2000, surgiu a segunda geração de rede móvel para a telefonia celular, que permitiu não só a transmissão de voz em formato digital como também a transferência de dados. É nessa época que surgem o Short Messages Service (SMS), o cartão de memória Subscriber Identity Module (SIM) e a identificação International Mobile Equipment Identity (IMEI); os dois últimos diretamente ligados à segurança da comunicação por voz e dados através de criptografia \cite{tcc2}.
 
-Nos anos 1980, surgiu a primeira geração de rede móvel para a telefonia celular
+Nessa segunda geração, a tecnologia anterior AMPS evoluiu para Digital Advanced Mobile Phone System (D-AMPS) e surgiu o Global System for Mobile Communications (GSM) como uma tentativa de padronização, sendo adotado no mundo todo \cite{aula3}. No primeiro, como era uma evolução do AMPS, possuía compatibilidade com a tecnologia do 1G e continuava a usar o FDMA; e trouxe como novidade o TDMA, sendo esse nome associado ao D-AMPS. No GSM, usava acesso múltiplo via uma combinação de TDMA e FDMA. No Brasil, foi adotado primeiramente o padrão D-AMPS/TDMA e substituído pelo GSM em 2002 \cite{tcc2}.
+
+Os equipamentos envolvidos em uma comunicação geralmente compreendem:
+\begin{description}
+	\item[User Equipment (UE) / Mobile Station (MS)] aparelho celular do usuário;
+	\item[Base Transceiver Station (BTS)] antena/torre/Estação de Rádio Base (ERB) da operadora;
+	\item[Base Station Controller (BSC)] controlador;
+	\item[Mobile Switching Center (MSC)] comutadora/central de comutação;
+	\item[Gateway Mobile Switching Center (GMSC)] ponto de comutação entre a rede celular e a rede de telefonia fixa PSTN (Public Switched Telephone Network).
+\end{description}
+
+Há algumas bases de dados envolvidas nessas comunicações:
+\begin{description}
+	\item[Home Location Register (HLR)] assinantes locais;
+	\item[Visitor Location Register (VLR)] celulares temporários na célula;
+	\item[Equipment Identity Register (EIR)] lista de identificadores dos aparelhos;
+	\item[AUthentication Center (AuC)] para autenticar assinantes.
+\end{description}
+
+Na comunicação, o aparelho celular do usuário se comunica com a antena. As antenas tanto transmitem para o celular quanto se ligam ao controlador. Os controladores controlam as diversas antenas, suas células, o handoff dos usuários e se comunicam com a comutadora. As comutadoras formam uma rede entre si e também possuem saída para outras redes.
+
+De forma geral, a rede GSM é dividida em duas partes distintas: a Rede de Acesso e o Núcleo da Rede. A Rede de Acesso, também chamada de Radio Access Network (RAN) ou de Base Station System (BSS), é composta das antenas e da controladora. O Núcleo da Rede, também chamado de Core Network ou de Switching System, é composto pela comutadora e pelas bases de dados.
+
+\subsection*{2,5G - Geração 2,5}
+
+Nos anos 2000, foram propostas duas evoluções para a rede GSM através de dois padrões que focavam na transmissão de dados: General Packet Radio Service (GPRS) e a Enhanced Data Rates for GSM Evolution (EDGE). Essas duas propostas ficaram conhecidas como geração 2,5 ou 2,5G e funcionavam sobre a base do GSM adicionando novos hardware e controles. Em ambos padrões, a voz nas comunicações ocorriam por comutação de pacotes, enquanto que o GSM sem esses padrões fazia uso da comutação de circuitos \cite{tcc2}.
 
 \section*{3G - Geração 3}
 \label{3g}
