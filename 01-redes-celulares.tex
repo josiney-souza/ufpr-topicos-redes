@@ -122,7 +122,17 @@ Nos anos 2000, foram propostas duas evoluções para a rede GSM através de dois
 \section*{3G - Geração 3}
 \label{3g}
 
-Apresentei a pistola. Apresentei a pistola. Escrevi porque quero tonto. Que a senhora tenha a cerveja. Que a senhora tenha a cerveja. Sorris a usar dentes. Eu tenho que pegar teu bruto. E afanar as minhas três Terezas. E afanar as minhas três Terezas. E afanar as minhas três Terezas.
+%Apresentei a pistola. Apresentei a pistola. Escrevi porque quero tonto. Que a senhora tenha a cerveja. Que a senhora tenha a cerveja. Sorris a usar dentes. Eu tenho que pegar teu bruto. E afanar as minhas três Terezas. E afanar as minhas três Terezas. E afanar as minhas três Terezas.
+
+Em 2008, se consolidou a terceira geração de rede móvel para a telefonia celular, que permitiu a transmissão não só de voz em formato digital como também a de dados. A partir de então, foi possível realizar videoconferências, downloads de vídeos, jogos interativos e Voz sobre Internet Protocol (IP) \cite{tcc1} e ainda manter compatibilidade com as redes de gerações anteriores.
+
+Diferente das anteriores, esta geração foi bastante influenciada pelo padrão International Mobile Telecommunications 2000 (IMT-2000) da International Telecommunication Union (ITU). A partir dele, as tecnologias Universal Mobile Telecommunications System (UMTS), primeiramente mais utilizada na União Europeia, e o CDMA-2000, inicialmente mais usado nos Estados Unidos, foram desenvolvidas.
+
+Nessas tecnologias, a divisão de acesso múltiplo é feita com CDMA, que usa toda a faixa de frequência disponível para a transmissão (sem divisão de frequência como no FDMA) e sem intervalos de tempos específicos para a transmissão (ao contrário do TDMA). É possível fazer transmissões massivas sem colisões entre os transmissores em razão de  uma estrutura chamada ``chips'', onde cada bit é representado por uma determinada quantidade de chips, geralmente 128.
+
+Cada dispositivo tem sua sequência de chips definida como um padrão de fábrica e as sequências são ortogonais entre si. Caso queira transmitir o equivalente ao bit 1, transmite sua própria sequência de chips; caso contrário, se quiser transmitir o bit 0, transmite o complemento da sua própria sequência de chips. A partir dessa técnica, pode-se considerar algumas propriedades: o produto interno normalizado de duas sequências quaisquer é 0; o produto interno normalizado de uma sequência por ela mesmo é 1; o produto interno normalizado de uma sequência pelo seu complemento é -1 \cite{aula4}.
+
+Em um determinado momento, a informação que chega para os dispositivos é uma sequência S que representa a soma de chips de todos os aparalhos que realizaram transmissão. Considerando-se as propriedades, para se recuperar a informação transmitida, faz-se o produto interno normalizado entre a sequência recebida e sequência ortogonal de chips do dispositivo D transmissor de quem se quer descobrir o bit transmitido.
 
 \section*{4G - Geração 4}
 \label{4g}
