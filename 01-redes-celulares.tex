@@ -1,9 +1,12 @@
 \documentclass[11pt,oneside,a4paper]{abntex2}
 
 \usepackage[brazil]{babel}
+\makeatletter\AtBeginDocument{\let\@elt\relax}\makeatother
 \usepackage[utf8]{inputenc}
 \usepackage{url}
 \usepackage{indentfirst}
+\usepackage{multirow}
+\usepackage{longtable}
 
 \titulo{Uma revisão sobre redes móveis de celulares}
 \autor{Josiney de Souza}
@@ -46,6 +49,58 @@ O restante do documento está assim dividido: a próxima seção aborda conceito
 	\item Canais
 \end{itemize}
 
+Os equipamentos envolvidos em uma comunicação geralmente compreendem:
+\begin{itemize}
+	\item aparelho celular do usuário;
+	\item antena/torre/Estação de Rádio Base (ERB) da operadora;
+	\item controlador;
+	\item comutadora/central de comutação;
+	\item ponto de comutação entre a rede celular e a rede de telefonia fixa PSTN (Public Switched Telephone Network).
+\end{itemize}
+
+Há algumas bases de dados envolvidas nessas comunicações:
+\begin{itemize}
+	\item assinantes locais;
+	\item celulares temporários na célula;
+	\item lista de identificadores dos aparelhos;
+	\item para autenticar assinantes.
+\end{itemize}
+
+Na comunicação, o aparelho celular do usuário se comunica com a antena. As antenas tanto transmitem para o celular quanto se ligam ao controlador. Os controladores controlam as diversas antenas, suas células, o handoff dos usuários e se comunicam com a comutadora. As comutadoras formam uma rede entre si e também possuem saída para outras redes.
+
+De forma geral, a rede móvel de telefonia celular é dividida em duas partes distintas: a Rede de Acesso e o Núcleo da Rede. A Rede de Acesso, também chamada de Radio Access Network (RAN) ou de Base Station System (BSS), é composta das antenas e da controladora. O Núcleo da Rede, também chamado de Core Network ou de Switching System, é composto pela comutadora e pelas bases de dados. Abaixo, na Tabela \ref{sopa-letrinhas-1}, encontra-se um compilado de nomes de equipamentos e seus correspondentes em cada uma das gerações celulares.
+
+\begin{center}
+\begin{longtable}{|m{1.5cm}|m{2.5cm}|l|m{2cm}|m{2cm}|m{2cm}|m{2cm}|}
+\caption{Nomes dos equipamentos de telefonia móvel celular em cada geração}
+\label{sopa-letrinhas-1}\\
+\hline
+                        & Equipamentos                           & 1G & 2G                                       & 3G                                                                                          & 4G                                                              & 5G                                                                                                                                          \\ \hline
+\endfirsthead
+%
+\multicolumn{7}{c}%
+{{\bfseries Tabela \thetable\ continuada da página anterior}} \\
+\hline
+                        & Equipamentos                           & 1G & 2G                                       & 3G                                                                                          & 4G                                                              & 5G                                                                                                                                          \\ \hline
+\endhead
+%
+\multirow{3}{*}{RAN}    & Aparelho Celular / Dispositivo         &    & User Equipment (UE); Mobile Station (MS) & User Equipment (UE)                                                                         & User Equipment (UE)                                             & User Equipment (UE)                                                                                                                         \\ \cline{2-7} 
+                        & Estação de Rádio Base                  &    & Base Transceiver Station (BTS)           & NodeB                                                                                       & eNodeB                                                          & new Generation NodeB (gNB); Unidade de Rádio; Unidade Distribuída; Unidade Central                                                          \\ \cline{2-7} 
+                        & Controlador                            &    & Base Station Controller (BSC)            & Radio Network Controller (RNC)                                                              & Mobility Management Entity (MME)                                & Access and Mobility Management Function (AMF)                                                                                               \\ \hline
+\multirow{2}{*}{Núcleo} & Comutadora / Central de Comutação      &    & Mobile Switching Center (MSC)            & Media GateWay (MGW); Serving GPRS Support Node (SGSN); Mobile Switching Center Server (MSC) & Policy \& Charging Rules Function (PCRF); Serving Gateway (SGW) & Policy Control Function (PCF); Network Exposure Function (NEF); Network Repository Function (NRF); Network Slicing Selector Function (NSSF) \\ \cline{2-7} 
+                        & Gateway                                &    & Gateway Mobile Switching Center (GMSC)   & Gateway GPRS Support Node (GGSN)                                                            & Packet Data Network Gateway (PGW)                               & User Plane Function (UPF); Session Management Function (SMF)                                                                                \\ \hline
+\multirow{4}{*}{Bases}  & Assinantes Locais                      &    & Home Location Register (HLR)             & Home Location Register (HLR)                                                                & Home Subscriber Server (HSS)                                    & Structured Data Storage Network Function (SDSF)                                                                                             \\ \cline{2-7} 
+                        & Assinantes Visitantes                  &    & Visitor Location Register (VLR)          & Visitor Location Register (VLR)                                                             & Home Subscriber Server (HSS)                                    & Unstructured Data Storage Network Function (UDSF)                                                                                           \\ \cline{2-7} 
+                        & Lista de identificadores dos aparelhos &    & Equipment Identity Register (EIR)        &                                                                                             & Home Subscriber Server (HSS)                                    & Unified Data Management (UDM)                                                                                                               \\ \cline{2-7} 
+                        & Autenticador                           &    & AUthentication Center (AuC)              &                                                                                             & Home Subscriber Server (HSS)                                    & Authentication Server Function (AUSF)                                                                                                       \\ \hline
+\end{longtable}
+\end{center}
+
+A seguir, na Tabela \ref{sopa-letrinhas-2}, é possível observar a relação entre as letras, tecnologias e gerações que aparecem no visor do aparelho celular.
+
+\begin{table}
+\caption{Relação entre letras que aparecem no visor do celular, tecnologias e gerações}
+\label{sopa-letrinhas-2}
 \begin{center}
 \begin{tabular}{||c||c||c||}
 	\hline
@@ -66,15 +121,8 @@ O restante do documento está assim dividido: a próxima seção aborda conceito
 	\hline
 \end{tabular}
 \end{center}
-
-\begin{enumerate}
-	\item[G] GPRS $\rightarrow$ 2,5G
-	\item[E] EDGE $\rightarrow$ 2,5G
-	\item[H] HSPA $\rightarrow$ 3G
-	\item[H+] HSPA Plus $\rightarrow$ 3G
-	\item[LTE] LTE $\rightarrow$ 4G
-	\item[5G] 5G $\rightarrow$ 5G
-\end{enumerate}
+\legend{Fonte: o autor (2023)}
+\end{table}
 
 \section*{1G - Geração 1}
 \label{1g}
@@ -94,35 +142,12 @@ Na década de 90 e anos 2000, surgiu a segunda geração de rede móvel para a t
 
 Nessa segunda geração, a tecnologia anterior AMPS evoluiu para Digital Advanced Mobile Phone System (D-AMPS) e surgiu o Global System for Mobile Communications (GSM) como uma tentativa de padronização, sendo adotado no mundo todo \cite{aula3}. No primeiro, como era uma evolução do AMPS, possuía compatibilidade com a tecnologia do 1G e continuava a usar o FDMA; e trouxe como novidade o TDMA, sendo esse nome associado ao D-AMPS. No GSM, usava acesso múltiplo via uma combinação de TDMA e FDMA. No Brasil, foi adotado primeiramente o padrão D-AMPS/TDMA e substituído pelo GSM em 2002 \cite{tcc2}.
 
-Os equipamentos envolvidos em uma comunicação geralmente compreendem:
-\begin{description}
-	\item[User Equipment (UE) / Mobile Station (MS)] aparelho celular do usuário;
-	\item[Base Transceiver Station (BTS)] antena/torre/Estação de Rádio Base (ERB) da operadora;
-	\item[Base Station Controller (BSC)] controlador;
-	\item[Mobile Switching Center (MSC)] comutadora/central de comutação;
-	\item[Gateway Mobile Switching Center (GMSC)] ponto de comutação entre a rede celular e a rede de telefonia fixa PSTN (Public Switched Telephone Network).
-\end{description}
-
-Há algumas bases de dados envolvidas nessas comunicações:
-\begin{description}
-	\item[Home Location Register (HLR)] assinantes locais;
-	\item[Visitor Location Register (VLR)] celulares temporários na célula;
-	\item[Equipment Identity Register (EIR)] lista de identificadores dos aparelhos;
-	\item[AUthentication Center (AuC)] para autenticar assinantes.
-\end{description}
-
-Na comunicação, o aparelho celular do usuário se comunica com a antena. As antenas tanto transmitem para o celular quanto se ligam ao controlador. Os controladores controlam as diversas antenas, suas células, o handoff dos usuários e se comunicam com a comutadora. As comutadoras formam uma rede entre si e também possuem saída para outras redes.
-
-De forma geral, a rede GSM é dividida em duas partes distintas: a Rede de Acesso e o Núcleo da Rede. A Rede de Acesso, também chamada de Radio Access Network (RAN) ou de Base Station System (BSS), é composta das antenas e da controladora. O Núcleo da Rede, também chamado de Core Network ou de Switching System, é composto pela comutadora e pelas bases de dados.
-
 \subsection*{2,5G - Geração 2,5}
 
 Nos anos 2000, foram propostas duas evoluções para a rede GSM através de dois padrões que focavam na transmissão de dados: General Packet Radio Service (GPRS) e a Enhanced Data Rates for GSM Evolution (EDGE). Essas duas propostas ficaram conhecidas como geração 2,5 ou 2,5G e funcionavam sobre a base do GSM adicionando novos hardware e controles. Em ambos padrões, a voz nas comunicações ocorriam por comutação de pacotes, enquanto que o GSM sem esses padrões fazia uso da comutação de circuitos \cite{tcc2}.
 
 \section*{3G - Geração 3}
 \label{3g}
-
-%Apresentei a pistola. Apresentei a pistola. Escrevi porque quero tonto. Que a senhora tenha a cerveja. Que a senhora tenha a cerveja. Sorris a usar dentes. Eu tenho que pegar teu bruto. E afanar as minhas três Terezas. E afanar as minhas três Terezas. E afanar as minhas três Terezas.
 
 Em 2008, se consolidou a terceira geração de rede móvel para a telefonia celular, que permitiu a transmissão não só de voz em formato digital como também a de dados. A partir de então, foi possível realizar videoconferências, downloads de vídeos, jogos interativos e Voz sobre Internet Protocol (IP) \cite{tcc1} e ainda manter compatibilidade com as redes de gerações anteriores.
 
