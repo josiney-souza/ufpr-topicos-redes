@@ -23,7 +23,7 @@ As redes de computadores revolucionaram o mundo em que vivemos. Através delas, 
 
 Atualmente, encontra-se aparelhos computacionais como \textit{desktops}/PCs, \textit{laptops}/notebooks, celulares \textit{smartphones} e \textit{tablets} que fazem uso dessas redes. Elas estão geralmente disponíveis em duas modalidades: redes cabeadas e redes sem fio. Alguns aparelhos podem usar mais de uma modalidade para suas comunicações.
 
-No que diz respeito às redes sem fio, os principais representantes são o Bluetooth, o Wi-Fi e as redes móveis celulares. O Bluetooth, como uma rede de abrangência PAN (Personal Area Network), tem alcance reduzido em comparação às demais. O Wi-Fi, como uma rede de abrangência LAN/WLAN (Local Area Network/Wireless Local Area Network), tem alcance maior que o primeiro porém em uma área delimitada não tão grande. A rede móvel de celular, como uma rede de abrangência WAN/WWAN (Wide Area Network/Wireles Wide Area Network) \cite{wwan}, tem alcance maior que as anteriores.
+No que diz respeito às redes sem fio, os principais representantes são o Bluetooth, o Wi-Fi e as redes móveis celulares. O Bluetooth, como uma rede de abrangência PAN (Personal Area Network), tem alcance reduzido em comparação às demais. O Wi-Fi, como uma rede de abrangência LAN/WLAN (Local Area Network/Wireless Local Area Network), tem alcance maior que o primeiro porém em uma área delimitada não tão grande. A rede móvel de celular, como uma rede de abrangência WAN/WWAN (Wide Area Network/Wireless Wide Area Network) \cite{wwan}, tem alcance maior que as anteriores.
 
 Ao longo do tempo, as redes móveis de celulares foram evoluindo até o momento atual. A primeira geração, fazia uso apenas de voz em formato analógico. A segunda geração, ainda fazia uso de voz porém em formato digital. A terceira geração, começou a disponibilizar dados além da transmissão de voz. A quarta geração, teve um aumento das taxas de transmissão e popularização do acesso à Internet pelos dispositivos. A quinta geração, a atual, começou a ter a separação de planos (de controle e de usuário), a definição de funções por software e uma maior ampliação de taxas e acessos. O momento atual também é de discussões sobre mudanças na quinta geração para que uma possível sexta geração incremente serviços a esse tipo de rede.
 
@@ -34,11 +34,11 @@ O restante do documento está assim dividido: a próxima seção aborda conceito
 
 A rede de telefonia móvel celular tem alguns conceitos importantes necessários de serem entendidos e definidos antes de se compreender as gerações e os termos usados em cada uma delas. Esses conceitos envolvem a definição de células, handover/handoff, canais, os equipamentos que fazem parte da comunicação e a estrutura/organização de equipamentos.
 
-As células, que dão o nome para a telefonia celular, são as áreas geográficas cobertas pelos sinais de rádio frequência que as antenas/torres das operadoras emitem para os aparelhos celulares \cite{def-celula}. Cada aparelho celular, independente da tecnologia ou geração, está ligado a uma célula. Em áreas com menos densidade populacional, o tamanho da célula é grande enquanto que, em regiões com maior densidade populacional, as células são menores para que possa haver mais célular e atender um quantitativo maior \cite{livro-comer}.
+As células, que dão o nome para a telefonia celular, são as áreas geográficas cobertas pelos sinais de rádio frequência que as antenas/torres das operadoras emitem para os aparelhos celulares \cite{def-celula}. Cada aparelho celular, independente da tecnologia ou geração, está ligado a uma célula. Em áreas com menos densidade populacional, o tamanho da célula é grande enquanto que, em regiões com maior densidade populacional, as células são menores para que possa haver mais células e atender um quantitativo maior \cite{livro-comer}.
 
 O handoff ou handouver (também chamado de transferência) é quando um usuário ou equipamento se move para além de sua célula atual e necessita que outra célula vizinha assuma a responsabilidade pela comunicação e controle do aparelho \cite{def-handoff}. O handoff também pode acontecer quando o sinal da atual célula não está atendendo às condições mínimas para a continuação da comunicação.
 
-A comunicação celular faz uso de alguns canais de comunicação. Em algumas tecnologias, são usados canais separados para recepção (downlink) e para transmissão (uplink). Esses canais podem ser físicos ou lógicos. Os canais também podem ser de tráfego/transporte ou de controle \cite{def-canal, tcc2}. Um dos canais de controle é o canal de paging, usado para notificações aos equipamentos dos usuários, por exemplo, uma chamada que chega \cite{def-paging}.
+A comunicação celular faz uso de alguns canais de comunicação. Em algumas tecnologias, são usados canais separados para recepção (\textit{downlink}) e para transmissão (\textit{uplink}). Esses canais podem ser físicos ou lógicos. Os canais também podem ser de tráfego/transporte ou de controle \cite{def-canal, tcc2}. Um dos canais de controle é o canal de \textit{paging}, usado para notificações aos equipamentos dos usuários, por exemplo, uma chamada que chega \cite{def-paging}.
 
 \subsection*{Comunicação}
 
@@ -48,13 +48,13 @@ Os equipamentos envolvidos em uma comunicação geralmente compreendem:
 	\item antena/torre/Estação de Rádio Base (ERB) da operadora;
 	\item controlador;
 	\item comutadora/central de comutação;
-	\item ponto de comutação entre a rede celular e a rede de telefonia fixa PSTN (Public Switched Telephone Network).
+	\item ponto de comutação entre a rede celular e a rede de telefonia fixa PSTN (Public Switched Telephone Network), Internet ou outras redes.
 \end{itemize}
 
 Há algumas bases de dados envolvidas nessas comunicações:
 \begin{itemize}
 	\item assinantes locais;
-	\item celulares temporários na célula;
+	\item celulares temporários na célula (visitantes);
 	\item lista de identificadores dos aparelhos;
 	\item para autenticar assinantes.
 \end{itemize}
@@ -63,10 +63,14 @@ Na comunicação, o aparelho celular do usuário se comunica com a antena. As an
 
 \subsection*{Estrutura}
 
-De forma geral, a rede móvel de telefonia celular é dividida em duas partes distintas: a Rede de Acesso e o Núcleo da Rede. A Rede de Acesso, também chamada de Radio Access Network (RAN) ou de Base Station System (BSS), é composta das antenas e da controladora. O Núcleo da Rede, também chamado de Core Network ou de Switching System, é composto pela comutadora e pelas bases de dados. Abaixo, na Tabela \ref{sopa-letrinhas-1}, encontra-se um compilado de nomes de equipamentos e seus correspondentes em cada uma das gerações celulares.
+De forma geral, a rede móvel de telefonia celular é dividida em duas partes distintas: a Rede de Acesso e o Núcleo da Rede. A Rede de Acesso, também chamada de Radio Access Network (RAN) ou de Base Station System (BSS) na 2G, Universal Mobile Telecommunications System (UMTS) Terrestrial RAN (UTRAN) na 3G, Evolved Universal Terrestrial RAN (E-UTRAN) na 4G, é composta das antenas e da controladora. Na 1G ela não era uma entidade isolada e na 5G existem os esforços para tornar a RAN aberta e dividida em serviços em software, sendo chamada de Open RAN ou O-RAN.
+
+O Núcleo da Rede, também chamado de Core Network ou especificamente de Switching System (SS) na 2G e de Evolved Packet Core (EPC) na 4G, é composto pela comutadora e pelas bases de dados. Assim como para a RAN, na 1G não era uma entidade isolada e na 5G os esforços são para deixá-la como serviços em software.
+
+Abaixo, na Tabela \ref{sopa-letrinhas-1}, encontra-se um compilado de nomes de equipamentos e seus correspondentes em cada uma das gerações celulares.
 
 \begin{center}
-\begin{longtable}{|m{1.5cm}|m{2.5cm}|l|m{2cm}|m{2cm}|m{2cm}|m{2cm}|}
+\begin{longtable}{|m{1.5cm}|m{2.5cm}|m{2cm}|m{2cm}|m{2cm}|m{2cm}|m{2cm}|}
 \caption{Nomes dos equipamentos de telefonia móvel celular em cada geração}
 \label{sopa-letrinhas-1}\\
 \hline
@@ -79,15 +83,15 @@ De forma geral, a rede móvel de telefonia celular é dividida em duas partes di
                         & Equipamentos                           & 1G & 2G                                       & 3G                                                                                          & 4G                                                              & 5G                                                                                                                                          \\ \hline
 \endhead
 %
-\multirow{3}{*}{RAN}    & Aparelho Celular / Dispositivo         &    & User Equipment (UE); Mobile Station (MS) & User Equipment (UE)                                                                         & User Equipment (UE)                                             & User Equipment (UE)                                                                                                                         \\ \cline{2-7} 
-                        & Estação de Rádio Base                  &    & Base Transceiver Station (BTS)           & NodeB                                                                                       & eNodeB                                                          & new Generation NodeB (gNB); Unidade de Rádio; Unidade Distribuída; Unidade Central                                                          \\ \cline{2-7} 
-                        & Controlador                            &    & Base Station Controller (BSC)            & Radio Network Controller (RNC)                                                              & Mobility Management Entity (MME)                                & Access and Mobility Management Function (AMF)                                                                                               \\ \hline
-\multirow{2}{*}{Núcleo} & Comutadora / Central de Comutação      &    & Mobile Switching Center (MSC)            & Media GateWay (MGW); Serving GPRS Support Node (SGSN); Mobile Switching Center Server (MSC) & Policy \& Charging Rules Function (PCRF); Serving Gateway (SGW) & Policy Control Function (PCF); Network Exposure Function (NEF); Network Repository Function (NRF); Network Slicing Selector Function (NSSF) \\ \cline{2-7} 
-                        & Gateway                                &    & Gateway Mobile Switching Center (GMSC)   & Gateway GPRS Support Node (GGSN)                                                            & Packet Data Network Gateway (PGW)                               & User Plane Function (UPF); Session Management Function (SMF)                                                                                \\ \hline
-\multirow{4}{*}{Bases}  & Assinantes Locais                      &    & Home Location Register (HLR)             & Home Location Register (HLR)                                                                & Home Subscriber Server (HSS)                                    & Structured Data Storage Network Function (SDSF)                                                                                             \\ \cline{2-7} 
-                        & Assinantes Visitantes                  &    & Visitor Location Register (VLR)          & Visitor Location Register (VLR)                                                             & Home Subscriber Server (HSS)                                    & Unstructured Data Storage Network Function (UDSF)                                                                                           \\ \cline{2-7} 
-                        & Lista de identificadores dos aparelhos &    & Equipment Identity Register (EIR)        &                                                                                             & Home Subscriber Server (HSS)                                    & Unified Data Management (UDM)                                                                                                               \\ \cline{2-7} 
-                        & Autenticador                           &    & AUthentication Center (AuC)              &                                                                                             & Home Subscriber Server (HSS)                                    & Authentication Server Function (AUSF)                                                                                                       \\ \hline
+\multirow{3}{*}{RAN}    & Aparelho Celular / Dispositivo do Usuário        & User Equipment (UE)                                                                           & User Equipment (UE) & User Equipment (UE)                                                                         & User Equipment (UE)                                             & User Equipment (UE)                                                                                                                         \\ \cline{2-7} 
+                        & Estação de Rádio Base (ERB)                 &   Base Station & Base Transceiver Station (BTS)           & NodeB                                                                                       & eNodeB                                                          & new Generation NodeB (gNB); Unidade de Rádio; Unidade Distribuída; Unidade Central                                                          \\ \cline{2-7} 
+                        & Controlador                            & Mobile Transport Network   & Base Station Controller (BSC)            & Radio Network Controller (RNC)                                                              & Mobility Management Entity (MME)                                & Access and Mobility Management Function (AMF)                                                                                               \\ \hline
+\multirow{2}{*}{Núcleo} & Comutadora / Central de Comutação      & Mobile Transport Network   & Mobile Switching Center (MSC)            & Media GateWay (MGW); Serving GPRS Support Node (SGSN); Mobile Switching Center Server (MSC) & Policy \& Charging Rules Function (PCRF); Serving Gateway (SGW) & Policy Control Function (PCF); Network Exposure Function (NEF); Network Repository Function (NRF); Network Slicing Selector Function (NSSF) \\ \cline{2-7} 
+                        & Gateway                                & Local Exchange   & Gateway Mobile Switching Center (GMSC)   & Gateway GPRS Support Node (GGSN)                                                            & Packet Data Network Gateway (PGW)                               & User Plane Function (UPF); Session Management Function (SMF)                                                                                \\ \hline
+\multirow{4}{*}{Bases}  & Assinantes Locais                      & Mobile Transport Network   & Home Location Register (HLR)             & Home Location Register (HLR)                                                                & Home Subscriber Server (HSS)                                    & Structured Data Storage Network Function (SDSF)                                                                                             \\ \cline{2-7} 
+                        & Assinantes Visitantes                  & Mobile Transport Network   & Visitor Location Register (VLR)          & Visitor Location Register (VLR)                                                             & Home Subscriber Server (HSS)                                    & Unstructured Data Storage Network Function (UDSF)                                                                                           \\ \cline{2-7} 
+                        & Lista de identificadores dos aparelhos & Mobile Transport Network   & Equipment Identity Register (EIR)        &                                                                                             & Home Subscriber Server (HSS)                                    & Unified Data Management (UDM)                                                                                                               \\ \cline{2-7} 
+                        & Autenticador                           & Mobile Transport Network   & AUthentication Center (AuC)              &                                                                                             & Home Subscriber Server (HSS)                                    & Authentication Server Function (AUSF)                                                                                                       \\ \hline
 \end{longtable}
 \end{center}
 
@@ -135,6 +139,8 @@ Essas melhorias foram possíveis devido à sua comutação de pacotes, tendo sua
 
 Uma das características na rede 4G é que o sinal de celular pode percorrer múltiplos caminhos até chegar ao destino, seja através da linha de visada ou via reflexões. Isso pode levar a múltiplas recepções do sinal. Esse problema é solucionado com o Channel Quality Indicator (CQI), onde há uma comunicação periódica com a ERB.
 
+Além dos múltiplos caminhos, o 4G trouxe a multipropagação com o Multiple-Input Multiple-Output (MIMO); ``uma tecnologia de radiotransmissão que usa múltiplos transmissores e antenas para melhorar o uso do espectro disponível'' \cite{aula5}. Essa tecnologia também foi incorporada em outras redes sem fio, como Wi-Fi 4, Wi-Fi 5, HSPA+ (3G) e 5G \cite{mimo} para aumentar suas taxas de transferências \cite{tcc2}.
+
 \section*{5G - Geração 5}
 \label{5g}
 
@@ -175,7 +181,7 @@ A seguir, na Tabela \ref{sumari}, é possível verificar um comparativo de infor
 Época                       & 1980                                                                                & 1990                        & 2000                         & 2008                                                     & 2010                                             & 2020                              & ? (2028?)          \\ \hline
 Padrões                     & AMPS (Américas); NTT (Japão); NMT (países nórdicos); TACS (Reino Unido); Outros ... & D-AMPS; GSM                 & GPRS; EDGE                   & WCDMA/UMTS (UE); CDMA-2000 (EUA)                         & IMT Advanced; LTE                                & New Radio (NR)                    & ?                  \\ \hline
 Acesso múltiplo             & FDMA                                                                                & FDMA; TDMA                  & FDMA; TDMA                   & CDMA                                                     & OFDMA                                            & OFDMA                             & ?                  \\ \hline
-Faixa de frequência         & 800 MHz                                                                             & 800 MHz; 900 MHz a 1900 MHz & 800 MHz; 900 MHz a 1900 MHz  & 1900 MHz                                                 & 700 MHz; 850 MHz; 1.800 MHz; 2.100 MHz; 2600 MHz & 700 MHz; 2,3 GHz; 3,5 GHz; 26 GHz & de 95 GHz; a 3 THz \\ \hline
+Faixa de frequência         & 800 MHz                                                                             & 800 MHz; 900 MHz a 1900 MHz & 800 MHz; 900 MHz a 1900 MHz  & 1900 MHz                                                 & 700 MHz; 850 MHz; 1.800 MHz; 2.100 MHz; 2600 MHz & 700 MHz; 2,3 GHz; 3,5 GHz; 26 GHz & de 95 GHz a 3 THz \\ \hline
 Taxa de transmissão teórica & 2.4 kb/s                                                                            & 15 kb/s                     & 115 kb/s; 384 kb/s           & 84 Mb/s                                                  & 100 Mb/s (download); 50 Mb/s (upload)            & 20 Gb/s                           & 1 Tbps             \\ \hline
 Taxa de transmissão real    & 2.4 kb/s                                                                            & 15 kb/s                     & 30 - 40 kb/s; 110 - 120 kb/s & 2 Mb/s (parado); 384 kb/s (pedestre); 144 kb/s (veículo) & 5 Mb/s                                           & 100 Mb/s a 400 Mb/s               & ?                  \\ \hline
 \end{longtable}
@@ -200,7 +206,7 @@ A seguir, na Tabela \ref{sopa-letrinhas-2}, é possível observar a relação en
 	\hline
 	H & HSPA & 3G \\
 	\hline
-	H+ & HSPA & 3G \\
+	H+ & HSPA+ & 3G \\
 	\hline
 	LTE & LTE & 4G \\
 	\hline
@@ -214,9 +220,9 @@ A seguir, na Tabela \ref{sopa-letrinhas-2}, é possível observar a relação en
 \section*{Conclusão}
 \label{conclusao}
 
-As redes de telefonia móvel revolucionaram o modo como vivemos. Nas primeiras gerações, era possível apenas se comunicar através de voz e/ou via SMS. Nas gerações mais novas, os dados se tornaram tão ou mais importantes que as ligações. Porém, em todas elas, a comunicação se dá de um mesmo \textit{modus operandi}: a partir do dispositivo do usuário, esse se comunica com a rede de acesso (RAN) inicialmente via estações de rádio base. A partir de então, no núcleo da rede, as informações ou conexões passa pelas controladoras, comutadoras, acessam as bases de informações e se dirigem aos dispositivos de destino, seja na própria rede ou em outras, como a Internet.
+As redes de telefonia móvel revolucionaram o modo como vivemos. Nas primeiras gerações, era possível apenas se comunicar através de voz e/ou via SMS. Nas gerações mais novas, os dados se tornaram tão ou mais importantes que as ligações. Porém, em todas elas, a comunicação se dá de um mesmo \textit{modus operandi}: a partir do dispositivo do usuário, esse se comunica com a rede de acesso (RAN) inicialmente via estações de rádio base. A partir de então, no núcleo da rede, as informações ou conexões passam pelas controladoras, comutadoras, acessam as bases de informações e se dirigem aos dispositivos de destino, seja na própria rede ou em outras, como a Internet.
 
-Atualmente, vivemos a transição da quarta para a quinta geração de telefonia móvel que objetiva aumentar as taxas de transmissão, melhorar os serviços já existentes e permitir com que mais dispositivos façam uso da tecnologia. Também temos os incentivos das instituições globais em criar módulos abertos na RAN ou no núcleo da rede. Ainda, é o momento das organizações mundiais pensarem a próxima geração da telefonia móvel, se receberá um novo nome/número ou se será um release sobre a 5G.
+Atualmente, vivemos a transição da quarta para a quinta geração de telefonia móvel que objetiva aumentar as taxas de transmissão, melhorar os serviços já existentes e permitir com que mais dispositivos façam uso da tecnologia. Também temos os incentivos das instituições globais em criar módulos abertos na RAN ou no núcleo da rede. Ainda, é o momento das organizações mundiais pensarem a próxima geração da telefonia móvel, se receberá um novo nome/número ou se será um \textit{release} sobre a 5G.
 
 Este trabalho tentou fazer uma consolidação de informações sobre as redes de telefonia móvel. Inicialmente, trouxe conceitos importantes para o entendimento do trabalho como um todo e definições que são comuns a todo o histórico dessas redes; a exemplo da maneira como a comunicação ocorre, os equipamentos envolvidos nessas comunicações e o comparativo da estrutura das redes ao longo das gerações.
 
