@@ -84,12 +84,12 @@ def server_program():
 
 def envia_menu():
     opcoes = [ '\nOpções disponíveis:\n',
-        ' 1- Criar base de dados\n',
-        ' 2- Consultar um valor\n',
-        ' 3- Consultar todos os valores\n',
-        ' 4- Atualizar um valor\n',
-        ' 5- Apagar um valor\n',
-        ' 6- Apagar base de dados\n',
+        ' 1- [CRUD - C] Criar base de dados\n',
+        ' 2- [CRUD - R] Consultar um valor\n',
+        ' 3- [CRUD - R] Consultar todos os valores\n',
+        ' 4- [CRUD - U] Atualizar um valor\n',
+        ' 5- [CRUD - D] Apagar um valor\n',
+        ' 6- [CRUD - D] Apagar base de dados\n',
         ' 7- Mostrar que tem SIGILO\n',
         ' 8- Mostrar que tem INTEGRIDADE\n',
         ' 9- Mostrar que tem AUTENTICIDADE\n',
