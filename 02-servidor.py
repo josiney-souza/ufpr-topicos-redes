@@ -47,7 +47,16 @@ def server_program():
                 db[chave] = valor
                 data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
         elif (str(data) == "5"):
-            data = "Apagar um valor"
+            #data = "Apagar um valor"
+            data = "Que valor apagar? "
+            conn.send(data.encode())
+            data = conn.recv(1024).decode()
+            chave = str(data)
+            if (chave not in db):
+                data = "### NÃO ENCONTRADO ###"
+            else:
+                del db[chave]
+                data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
         elif (str(data) == "6"):
             data = "Apagar base de dados"
         elif (str(data) == "7"):
