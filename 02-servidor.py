@@ -47,7 +47,6 @@ def server_program():
                 db[chave] = valor
                 data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
         elif (str(data) == "5"):
-            #data = "Apagar um valor"
             data = "Que valor apagar? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
@@ -58,7 +57,16 @@ def server_program():
                 del db[chave]
                 data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
         elif (str(data) == "6"):
-            data = "Apagar base de dados"
+            #data = "Apagar base de dados"
+            data = "Tem certeza? "
+            conn.send(data.encode())
+            data = conn.recv(1024).decode()
+            if (str(data) == "s"):
+                for chave in list(db):
+                    del db[chave]
+                data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+            else:
+                data = "### BASE INALTERADA ###"
         elif (str(data) == "7"):
             data = "Implementar SIGILO"
         elif (str(data) == "8"):
