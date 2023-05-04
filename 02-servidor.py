@@ -26,9 +26,12 @@ def server_program():
             data = "Que valor consultar? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
-            data = str(db[str(data)])
+            if (str(data) not in db):
+                data = "### NÃO ENCONTRADO ###"
+            else:
+                data = str(db[str(data)])
         elif (str(data) == "3"):
-            data = "Consultar todos os valores"
+            data = envia_todo_banco(db)
         elif (str(data) == "4"):
             data = "Atualizar um valor"
         elif (str(data) == "5"):
@@ -68,6 +71,13 @@ def envia_menu():
     for opcao in opcoes:
         str_envio = str_envio + opcao
     return str_envio
+
+def envia_todo_banco (db):
+    str_unica = "\nCHAVE : VALOR\n"
+    for chave in db:
+        valor=db[chave];
+        str_unica = str_unica + str(chave) + ":" + str(valor) + '\n'
+    return str_unica
 
 if __name__ == '__main__':
     server_program()
