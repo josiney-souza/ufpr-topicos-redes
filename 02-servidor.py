@@ -23,7 +23,10 @@ def server_program():
         if (str(data) == "1"):
             data = "Criar base dados"
         elif (str(data) == "2"):
-            data = "Consultar um valor"
+            data = "Que valor consultar? "
+            conn.send(data.encode())
+            data = conn.recv(1024).decode()
+            data = str(db[str(data)])
         elif (str(data) == "3"):
             data = "Consultar todos os valores"
         elif (str(data) == "4"):
