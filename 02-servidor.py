@@ -14,6 +14,8 @@ def server_program():
     server_socket.listen(2)
     conn, address = server_socket.accept()  # accept new connection
     print("Cliente conectado: " + str(address))
+
+    db = dict(ark04=1, bcr04=2, dksy04=3, jos04=4, leg04=5, lhal04=6, rums04=7, sau04=8)
     while True:
         # receive data stream. it won't accept data packet greater than 1024 bytes
         data = conn.recv(1024).decode()
