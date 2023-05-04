@@ -21,7 +21,20 @@ def server_program():
         data = conn.recv(1024).decode()
 
         if (str(data) == "1"):
-            data = "Criar base dados"
+            #data = "Criar base dados"
+            data = "Que chave inserir? "
+            conn.send(data.encode())
+            data = conn.recv(1024).decode()
+            chave = str(data)
+            if (chave not in db):
+                data = "Qual será o valor? "
+                conn.send(data.encode())
+                data = conn.recv(1024).decode()
+                valor=str(data)
+                db[chave] = valor
+                data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+            else:
+                data = "### CHAVE JÁ EXISTE ###"
         elif (str(data) == "2"):
             data = "Que valor consultar? "
             conn.send(data.encode())
@@ -84,7 +97,7 @@ def server_program():
 
 def envia_menu():
     opcoes = [ '\nOpções disponíveis:\n',
-        ' 1- [CRUD - C] Criar base de dados\n',
+        ' 1- [CRUD - C] Adicionar um registro\n',
         ' 2- [CRUD - R] Consultar um valor\n',
         ' 3- [CRUD - R] Consultar todos os valores\n',
         ' 4- [CRUD - U] Atualizar um valor\n',
