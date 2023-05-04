@@ -13,19 +13,56 @@ def server_program():
     # configure how many client the server can listen simultaneously
     server_socket.listen(2)
     conn, address = server_socket.accept()  # accept new connection
-    print("Connection from: " + str(address))
+    print("Cliente conectado: " + str(address))
     while True:
         # receive data stream. it won't accept data packet greater than 1024 bytes
         data = conn.recv(1024).decode()
-        if not data:
-            # if data is not received break
+
+        if (str(data) == "1"):
+            data = "Criar base dados"
+        elif (str(data) == "2"):
+            data = "Consultar um valor"
+        elif (str(data) == "3"):
+            data = "Consultar todos os valores"
+        elif (str(data) == "4"):
+            data = "Atualizar um valor"
+        elif (str(data) == "5"):
+            data = "Apagar um valor"
+        elif (str(data) == "6"):
+            data = "Apagar base de dados"
+        elif (str(data) == "7"):
+            data = "Implementar SIGILO"
+        elif (str(data) == "8"):
+            data = "Implementar INTEGRIDADE"
+        elif (str(data) == "9"):
+            data = "Implementar AUTENTICIDADE"
+        elif (not data):
             break
-        print("from connected user: " + str(data))
-        data = input(' -> ')
+        else:
+            data = envia_menu()
+
         conn.send(data.encode())  # send data to the client
 
     conn.close()  # close the connection
 
+def envia_menu():
+    opcoes = [ '\nOpções disponíveis:\n',
+        ' 1- Criar base de dados\n',
+        ' 2- Consultar um valor\n',
+        ' 3- Consultar todos os valores\n',
+        ' 4- Atualizar um valor\n',
+        ' 5- Apagar um valor\n',
+        ' 6- Apagar base de dados\n',
+        ' 7- Mostrar que tem SIGILO\n',
+        ' 8- Mostrar que tem INTEGRIDADE\n',
+        ' 9- Mostrar que tem AUTENTICIDADE\n',
+        ' ?- Ajuda\n',
+        ' 0- Desconectar'
+    ]
+    str_envio = ""
+    for opcao in opcoes:
+        str_envio = str_envio + opcao
+    return str_envio
 
 if __name__ == '__main__':
     server_program()
