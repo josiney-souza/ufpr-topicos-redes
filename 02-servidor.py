@@ -33,7 +33,19 @@ def server_program():
         elif (str(data) == "3"):
             data = envia_todo_banco(db)
         elif (str(data) == "4"):
-            data = "Atualizar um valor"
+            data = "Que valor atualizar? "
+            conn.send(data.encode())
+            data = conn.recv(1024).decode()
+            chave = str(data)
+            if (chave not in db):
+                data = "### NÃO ENCONTRADO ###"
+            else:
+                data = "Qual será o novo valor? "
+                conn.send(data.encode())
+                data = conn.recv(1024).decode()
+                valor=str(data)
+                db[chave] = valor
+                data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
         elif (str(data) == "5"):
             data = "Apagar um valor"
         elif (str(data) == "6"):
