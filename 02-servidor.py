@@ -10,16 +10,44 @@
 #
 # Base do codigo: https://www.digitalocean.com/community/tutorials/python-socket-programming-server-client
 # Acesso em 04/05/2023
+#
+# Fork: https://www.geeksforgeeks.org/python-os-fork-method/
+# Acesso em 05/05/2023
+#
+# Thread opcao 1: https://realpython.com/intro-to-python-threading/
+# Thread opcao 2: https://superfastpython.com/threading-in-python/
+# Acesso em 05/05/2023
 
 
 
 # Adicao do modulo socket para conseguir realizar a conexao cliente-servidor
 import socket
+# Adicao do modulo os para fazer fork()
+#import os
+# Adicao do modulo threading para criar Threads
+import threading
+# Adicao do modulo concurrent.futures para criar um pool de Threads
+#import concurrent.futures
 
 ###############################################################################
 # Funcao principal
 ###############################################################################
+# Parametro: nao ha
+###############################################################################
+# Retorno: nao ha
+###############################################################################
+#
+# Inicialmente, o servidor possui apenas a Thread principal e fica em loop
+# infinito a espera de novas conexoes
+#
+# Quando uma nova conexao chega, se cria uma nova Thread para tratar
+# especificamente dela, executando assim a funcao_thread()
+###############################################################################
 def server_program():
+# Dicionario de exemplo que serve como base de dados inicial para as
+    # acoes de interacao entre cliente e servidor
+    db = dict(ark04=1, bcr04=2, dksy04=3, jos04=4, leg04=5, lhal04=6, rums04=7, sau04=8)
+
     # Obtem a identificacao/endereco do servidor (este)
     host = socket.gethostname()
     # Indica a porta que o servidor ficara escutando as conexoes
@@ -35,14 +63,49 @@ def server_program():
     server_socket.listen(2)
 
     # Aceita novas conexoes de clientes
-    conn, address = server_socket.accept()
+    while True:
+        conn, address = server_socket.accept()
 
+        # Tentativa de executar um fork() para as atividades de escutar
+        # novas conexoes e de tratar as conexoes em dois tipos de processos
+        # OBS.: nao eh viavel pois os processos filhos nao compartilham das
+        #       variaveis do processo pai, tendo cada qual seu proprio
+        #       contexto
+        #pid = os.fork()
+        #if (pid == 0):
+        #    break
+
+        # Apos uma nova conexao ser aceita, se cria uma thread para trata-la
+        # OBS.: em 'target', indicar apenas o nome da funcao da thread
+        #       quando se passa tambem os argumentos, a thread principal
+        #       fica travada ate a thread filha terminar sua execucao
+        #       Passar os argumentos via 'args'
+        x = threading.Thread(target=funcao_thread, args=(conn, address, db))
+        x.start()
+
+        # Tentativa de executar um pool de threads para tratar do problema
+        #with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        #    executor.map(funcao_thread(conn, address, db), i)
+
+
+
+###############################################################################
+# Funcao funcao_thread()
+###############################################################################
+# Parametro: uma conexao (conn), um endereco (address), um dicionario (db)
+###############################################################################
+# Retorno: nao ha
+###############################################################################
+#
+# Esta funcao possui todo o codigo que uma thread de tratamento de conexao
+# faz, ou seja, eh nesta funcao que se faz o CRUD da base de dados
+#
+# Executa-se uma desta funcao para cada thread criada para tratar as conexoes
+# que chegam dos clientes
+###############################################################################
+def funcao_thread (conn, address, db):
     # Exibe uma mensagem para informar que cliente (IP e porta) se conectou
     print("Cliente conectado: " + str(address))
-
-    # Dicionario de exemplo que serve como base de dados inicial para as
-    # acoes de interacao entre cliente e servidor
-    db = dict(ark04=1, bcr04=2, dksy04=3, jos04=4, leg04=5, lhal04=6, rums04=7, sau04=8)
 
     while True:
         # Recebe os dados da comunicacao com o cliente
@@ -272,6 +335,7 @@ def server_program():
 ###############################################################################
 # Retorno: uma string (str_envio)
 ###############################################################################
+#
 # Cria uma string 'str_envio' com todas as opcoes disponiveis reconhecidas
 # pelo servidor para que seja enviada ao cliente e este possa escolhar uma
 # opcao de interacao
@@ -309,6 +373,7 @@ def envia_menu():
 ###############################################################################
 # Retorno: uma string (str_unica)
 ###############################################################################
+#
 # Faz a varredura em um dicionario 'db' e monta uma string 'str_unica' com
 # todos os pares de chave-valor contidos no dicionario (base de dados)
 #
