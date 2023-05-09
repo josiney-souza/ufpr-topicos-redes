@@ -48,6 +48,9 @@ def server_program():
     # acoes de interacao entre cliente e servidor
     db = dict(ark04=1, bcr04=2, dksy04=3, jos04=4, leg04=5, lhal04=6, rums04=7, sau04=8)
 
+    chave_pub_cliente = 401
+    chave_pub_invasor = 191
+
     # Obtem a identificacao/endereco do servidor (este)
     host = socket.gethostname()
     # Indica a porta que o servidor ficara escutando as conexoes
@@ -80,7 +83,7 @@ def server_program():
         #       quando se passa tambem os argumentos, a thread principal
         #       fica travada ate a thread filha terminar sua execucao
         #       Passar os argumentos via 'args'
-        x = threading.Thread(target=funcao_thread, args=(conn, address, db))
+        x = threading.Thread(target=funcao_thread, args=(conn, address, db, chave_pub_cliente, chave_pub_invasor))
         x.start()
 
         # Tentativa de executar um pool de threads para tratar do problema
@@ -103,7 +106,7 @@ def server_program():
 # Executa-se uma desta funcao para cada thread criada para tratar as conexoes
 # que chegam dos clientes
 ###############################################################################
-def funcao_thread (conn, address, db):
+def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
     # Exibe uma mensagem para informar que cliente (IP e porta) se conectou
     print("Cliente conectado: " + str(address))
 
