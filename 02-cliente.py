@@ -15,6 +15,8 @@
 
 # Adicao do modulo socket para conseguir realizar a conexao cliente-servidor
 import socket
+# Adicao de um modulo de funcoes comuns ao cliente, servidor e invasor
+import funcoes_comuns
 
 ###############################################################################
 # Funcao principal
@@ -66,6 +68,9 @@ def client_program():
         # comando para se enviar ao servidor
         # De novo. Eh o incremento/passo indutivo para sair do laco
         message = input(" -> ")
+
+        if (data == "Que mensagem quer enviar? "):
+            message = cripto_subs(message, chave_privada)
 
     # Caso nao tenha mais o que trocar de mensagem, fecha sua parte da
     # conexao com o servidor

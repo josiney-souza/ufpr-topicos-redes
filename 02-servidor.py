@@ -22,6 +22,8 @@
 
 # Adicao do modulo socket para conseguir realizar a conexao cliente-servidor
 import socket
+# Adicao de um modulo de funcoes comuns ao cliente, servidor e invasor
+import funcoes_comuns
 # Adicao do modulo os para fazer fork()
 #import os
 # Adicao do modulo threading para criar Threads
@@ -292,7 +294,13 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # TO-DO
         #######################################################################
         elif (str(data) == "9"):
-            data = "Implementar AUTENTICIDADE"
+            data = "Que mensagem quer enviar? "
+            conn.send(data.encode())
+            data = conn.recv(1024).decode()
+            print("---> Mensagem criptografada:", data)
+            print("---> Mensagem descriptografada cliente:", descripto_subs(data, chave_pub_cliente))
+            print("---> Mensagem descriptografada invasor:", descripto_subs(data, chave_pub_invasor))
+            data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
         
 
 
