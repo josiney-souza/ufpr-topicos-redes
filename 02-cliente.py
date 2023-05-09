@@ -20,6 +20,10 @@ import socket
 # Funcao principal
 ###############################################################################
 def client_program():
+    # https://pt.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/modular-inverses
+    chave_publica = 401
+    chave_privada = 601
+
     # Obtem a identificacao/endereco do servidor (este)
     host = socket.gethostname()
     # Indica a porta que o servidor ficara escutando as conexoes
