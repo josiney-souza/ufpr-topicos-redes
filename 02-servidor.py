@@ -50,6 +50,8 @@ def server_program():
     # acoes de interacao entre cliente e servidor
     db = dict(ark04=1, bcr04=2, dksy04=3, jos04=4, leg04=5, lhal04=6, rums04=7, sau04=8)
 
+    # Variaveis para armazenar as chaves publicas dos clientes
+    # Apenas as chaves publicas dos clientes sao armazenadas no servidor
     chave_pub_cliente = 401
     chave_pub_invasor = 191
 
@@ -291,7 +293,12 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Opcao 9: AUTENTICIDADE
         #######################################################################
         #
-        # TO-DO
+        # MODO DEBUG ALINHADO COM O SERVIDOR
+        #
+        # Antes de enviar a mensagem, criptografa com a chave privada
+        # Como o servidor tem a chave publica, consegue descriptografar
+        # Se tentar descriptografar com a chave publica do invasor, string
+        # fica ilegivel
         #######################################################################
         elif (str(data) == "9"):
             data = "Que mensagem quer enviar? "

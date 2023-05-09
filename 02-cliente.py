@@ -22,8 +22,13 @@ import funcoes_comuns
 # Funcao principal
 ###############################################################################
 def client_program():
+    # Variaveis para armazenar o par de chaves do cliente
+    # As duas chaves (publica e privada) sao inversos multiplicativos na
+    # aritmetica modular. Fonte:
     # https://pt.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/modular-inverses
+    # Chave publica do cliente = 401 - o menor valor do par
     chave_publica = 401
+    # Chave privada do cliente = 601 - o maior do par
     chave_privada = 601
 
     # Obtem a identificacao/endereco do servidor (este)
@@ -69,6 +74,12 @@ def client_program():
         # De novo. Eh o incremento/passo indutivo para sair do laco
         message = input(" -> ")
 
+        # MODO DEBUG ALINHADO COM O SERVIDOR
+        #
+        # Antes de enviar a mensagem, criptografa com a chave privada
+        # Como o servidor tem a chave publica, consegue descriptografar
+        # Se tentar descriptografar com a chave publica do invasor, string
+        # fica ilegivel
         if (data == "Que mensagem quer enviar? "):
             message = cripto_subs(message, chave_privada)
 
