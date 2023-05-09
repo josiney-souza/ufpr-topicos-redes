@@ -305,8 +305,8 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
             conn.send(data.encode())
             data = conn.recv(1024).decode()
             print("---> Mensagem criptografada:", data)
-            print("---> Mensagem descriptografada cliente:", descripto_subs(data, chave_pub_cliente))
-            print("---> Mensagem descriptografada invasor:", descripto_subs(data, chave_pub_invasor))
+            print("---> Mensagem descriptografada cliente:", funcoes_comuns.descripto_subs(data, chave_pub_cliente))
+            print("---> Mensagem descriptografada invasor:", funcoes_comuns.descripto_subs(data, chave_pub_invasor))
             data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
         
 

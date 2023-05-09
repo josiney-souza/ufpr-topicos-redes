@@ -81,7 +81,7 @@ def client_program():
         # Se tentar descriptografar com a chave publica do invasor, string
         # fica ilegivel
         if (data == "Que mensagem quer enviar? "):
-            message = cripto_subs(message, chave_privada)
+            message = funcoes_comuns.cripto_subs(message, chave_privada)
 
     # Caso nao tenha mais o que trocar de mensagem, fecha sua parte da
     # conexao com o servidor
