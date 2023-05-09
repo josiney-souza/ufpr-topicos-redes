@@ -1,9 +1,9 @@
 ###############################################################################
-# Funcao cripto_subs()
+# Funcao cripto_chave_assim()
 ###############################################################################
 # Parametro: uma string (data) e um inteiro (chave)
 ###############################################################################
-# Retorno: uma string (str_cripto_subs)
+# Retorno: uma string (str_cripto_chave_assim)
 ###############################################################################
 #
 # A partir de uma string 'data', que representa os dados que serão
@@ -28,28 +28,28 @@
 # Por fim, retira-se o espaco em branco extra da ultima iteracao e retorna a
 # string criptografada
 ###############################################################################
-def cripto_subs (data, chave):
-    str_cripto_subs = ""
+def cripto_chave_assim (data, chave):
+    str_cripto_chave_assim = ""
     for pos in data:
         codif = ord(pos)
         codif = (codif * chave) % 1000
-        str_cripto_subs = str_cripto_subs + str(codif) + " "
-    return str_cripto_subs[:-1]
+        str_cripto_chave_assim = str_cripto_chave_assim + str(codif) + " "
+    return str_cripto_chave_assim[:-1]
 
 
 
 ###############################################################################
-# Funcao descripto_subs()
+# Funcao descripto_chave_assim()
 ###############################################################################
 # Parametro: uma string (data) e um inteiro (chave)
 ###############################################################################
-# Retorno: uma string (str_descripto_subs)
+# Retorno: uma string (str_descripto_chave_assim)
 ###############################################################################
 #
 # A partir de uma string 'data', que representa os dados que serão
 # transmitidos, e de um inteiro 'chave', que representa uma chave publica ou
 # privada, faz a descriptografia (o computo para descriptografar a mensagem
-# anteriormente criptografada com cripto_subs()
+# anteriormente criptografada com cripto_chave_assim()
 #
 # Para descriptografar, como entre cada representacao inteira do caractere
 # (que esta transformado em caractere/string) ha um espaco em branco
@@ -66,10 +66,10 @@ def cripto_subs (data, chave):
 # descriptografado, transforma-o em caractere e se reconstroi a string
 # original e a retorna
 ###############################################################################
-def descripto_subs (data, chave):
-    str_descripto_subs = ""
+def descripto_chave_assim (data, chave):
+    str_descripto_chave_assim = ""
     for num in data.split():
         codif = int(num)
         codif = (codif * chave) % 1000
-        str_descripto_subs = str_descripto_subs + chr(codif)
-    return str_descripto_subs
+        str_descripto_chave_assim = str_descripto_chave_assim + chr(codif)
+    return str_descripto_chave_assim
