@@ -73,3 +73,25 @@ def descripto_chave_assim (data, chave):
         codif = (codif * chave) % 1000
         str_descripto_chave_assim = str_descripto_chave_assim + chr(codif)
     return str_descripto_chave_assim
+
+
+
+def cripto_rot13 (data):
+    str_cripto_rot13 = ""
+    for pos in data:
+        rot13 = ord(pos)
+        rot13 = (rot13 + 13) % 256
+        if (rot13 < 32):
+            rot13 = rot13 + 32
+        str_cripto_rot13 = str_cripto_rot13 + chr(rot13)
+    return str_cripto_rot13
+
+def descripto_rot13 (data):
+    str_descripto_rot13 = ""
+    for pos in data:
+        rot13 = ord(pos)
+        if (rot13 < (32+13)):
+            rot13 = rot13 - 32 + 256
+        rot13 = rot13 - 13
+        str_descripto_rot13 = str_descripto_rot13 + chr(rot13)
+    return str_descripto_rot13
