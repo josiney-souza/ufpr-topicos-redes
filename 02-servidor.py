@@ -295,7 +295,10 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         #
         # MODO DEBUG ALINHADO COM O SERVIDOR
         #
-        # Antes de enviar a mensagem, criptografa com a chave privada
+        # Antes de enviar a mensagem, criptografa com a cifra de Cesar,
+        # depois com chave privada e novamente com a cifra de Cesar
+        # No servidor, descriptografa com a cifra de Cesar, depois com a
+        # chave publica e de novo com a cifra de Cesar
         # Como o servidor tem a chave publica, consegue descriptografar
         # Se tentar descriptografar com a chave publica do invasor, string
         # fica ilegivel
@@ -305,8 +308,15 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
             conn.send(data.encode())
             data = conn.recv(1024).decode()
             print("---> Mensagem criptografada:", data)
-            print("---> Mensagem descriptografada cliente:", funcoes_comuns.descripto_chave_assim(data, chave_pub_cliente))
-            print("---> Mensagem descriptografada invasor:", funcoes_comuns.descripto_chave_assim(data, chave_pub_invasor))
+            data = funcoes_comuns.descripto_rot13(data)
+            print("|-----> (1) Mensagem descriptografada com ROT13:", data)
+            cifra = funcoes_comuns.descripto_chave_assim(data, chave_pub_invasor)
+            print("|-----> (2) Mensagem descriptografada com chave invasor:", cifra)
+            data = funcoes_comuns.descripto_chave_assim(data, chave_pub_cliente)
+            print("|-----> (2) Mensagem descriptografada com chave publica:", data)
+            data = funcoes_comuns.descripto_rot13(data)
+            print("|-----> (3) Mensagem descriptografada com ROT13:", data)
+            print()
             data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
         
 

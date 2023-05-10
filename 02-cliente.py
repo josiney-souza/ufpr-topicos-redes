@@ -76,12 +76,17 @@ def client_program():
 
         # MODO DEBUG ALINHADO COM O SERVIDOR
         #
-        # Antes de enviar a mensagem, criptografa com a chave privada
+        # Antes de enviar a mensagem, criptografa com a cifra de Cesar,
+        # depois com chave privada e novamente com a cifra de Cesar
+        # No servidor, descriptografa com a cifra de Cesar, depois com a
+        # chave publica e de novo com a cifra de Cesar
         # Como o servidor tem a chave publica, consegue descriptografar
         # Se tentar descriptografar com a chave publica do invasor, string
         # fica ilegivel
         if (data == "Que mensagem quer enviar? "):
+            message = funcoes_comuns.cripto_rot13(message)
             message = funcoes_comuns.cripto_chave_assim(message, chave_privada)
+            message = funcoes_comuns.cripto_rot13(message)
 
     # Caso nao tenha mais o que trocar de mensagem, fecha sua parte da
     # conexao com o servidor
