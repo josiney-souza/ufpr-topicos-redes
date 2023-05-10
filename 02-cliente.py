@@ -62,6 +62,17 @@ def client_program():
     # conexao com o servidor sera fechada
     ###########################################################################
     while message.lower().strip() != '0':
+        # Antes de enviar a mensagem, criptografa com a cifra de Cesar,
+        # depois com chave privada e novamente com a cifra de Cesar
+        # No servidor, descriptografa com a cifra de Cesar, depois com a
+        # chave publica e de novo com a cifra de Cesar
+        # Como o servidor tem a chave publica, consegue descriptografar
+        # Se tentar descriptografar com a chave publica do invasor, string
+        # fica ilegivel
+        message = funcoes_comuns.cripto_rot13(message)
+        message = funcoes_comuns.cripto_chave_assim(message, chave_privada)
+        message = funcoes_comuns.cripto_rot13(message)
+
         # Envia mensagem/comando para o servidor
         client_socket.send(message.encode())
         # Aguarda uma resposta para poder prosseguir
@@ -73,20 +84,6 @@ def client_program():
         # comando para se enviar ao servidor
         # De novo. Eh o incremento/passo indutivo para sair do laco
         message = input(" -> ")
-
-        # MODO DEBUG ALINHADO COM O SERVIDOR
-        #
-        # Antes de enviar a mensagem, criptografa com a cifra de Cesar,
-        # depois com chave privada e novamente com a cifra de Cesar
-        # No servidor, descriptografa com a cifra de Cesar, depois com a
-        # chave publica e de novo com a cifra de Cesar
-        # Como o servidor tem a chave publica, consegue descriptografar
-        # Se tentar descriptografar com a chave publica do invasor, string
-        # fica ilegivel
-        if (data == "Que mensagem quer enviar? "):
-            message = funcoes_comuns.cripto_rot13(message)
-            message = funcoes_comuns.cripto_chave_assim(message, chave_privada)
-            message = funcoes_comuns.cripto_rot13(message)
 
     # Caso nao tenha mais o que trocar de mensagem, fecha sua parte da
     # conexao com o servidor
