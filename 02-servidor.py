@@ -118,6 +118,7 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Recebe os dados da comunicacao com o cliente
         # Tem como limite 1024 B (1 kB) para o pacote de dados
         data = conn.recv(1024).decode()
+        data = descriptografar(data, chave_pub_cliente)
 
         #######################################################################
         # Opcao 1: Inserir um item (C do CRUD)
@@ -133,18 +134,18 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Nessa ultima situacao, se desejar sobrescrever o item, usar a
         # opcao de atualizacao (opcao/menu 4)
         #######################################################################
-        if (descriptografar(data, chave_pub_cliente) == "1"):
+        if (data == "1"):
             data = "Que chave inserir? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
             data = descriptografar(data, chave_pub_cliente)
-            chave = str(data)
+            chave = data
             if (chave not in db):
                 data = "Qual será o valor? "
                 conn.send(data.encode())
                 data = conn.recv(1024).decode()
                 data = descriptografar(data, chave_pub_cliente)
-                valor=str(data)
+                valor= data
                 db[chave] = valor
                 data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
             else:
@@ -165,15 +166,15 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Senao, busca pelo valor associado a chave no dicionario e retorna
         # o resultado para o cliente
         #######################################################################
-        elif (descriptografar(data, chave_pub_cliente) == "2"):
+        elif (data == "2"):
             data = "Que valor consultar? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
             data = descriptografar(data, chave_pub_cliente)
-            if (str(data) not in db):
+            if (data not in db):
                 data = "### NÃO ENCONTRADO ###"
             else:
-                data = str(db[str(data)])
+                data = db[data]
 
 
 
@@ -186,7 +187,7 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # string com todos os registros de chave-valor cadastrados,
         # retornando-a para o cliente
         #######################################################################
-        elif (descriptografar(data, chave_pub_cliente) == "3"):
+        elif (data == "3"):
             data = envia_todo_banco(db)
 
 
@@ -204,12 +205,12 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Senao, obtem com o cliente o novo valor que deve ser atribuido a
         # chave escolhida e o atualiza no dicionario, informando o cliente
         #######################################################################
-        elif (descriptografar(data, chave_pub_cliente) == "4"):
+        elif (data == "4"):
             data = "Que valor atualizar? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
             data = descriptografar(data, chave_pub_cliente)
-            chave = str(data)
+            chave = data
             if (chave not in db):
                 data = "### NÃO ENCONTRADO ###"
             else:
@@ -217,7 +218,7 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
                 conn.send(data.encode())
                 data = conn.recv(1024).decode()
                 data = descriptografar(data, chave_pub_cliente)
-                valor=str(data)
+                valor= data
                 db[chave] = valor
                 data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
 
@@ -236,12 +237,12 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Senao, apaga a chave informada e, consequentemente, seu valor,
         # informando o cliente
         #######################################################################
-        elif (descriptografar(data, chave_pub_cliente) == "5"):
+        elif (data == "5"):
             data = "Que valor apagar? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
             data = descriptografar(data, chave_pub_cliente)
-            chave = str(data)
+            chave = data
             if (chave not in db):
                 data = "### NÃO ENCONTRADO ###"
             else:
@@ -260,12 +261,14 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         #
         # Senao, apenas informa que NADA foi alterado
         #######################################################################
-        elif (descriptografar(data, chave_pub_cliente) == "6"):
+        elif (data == "6"):
             data = "Tem certeza? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
             data = descriptografar(data, chave_pub_cliente)
-            if (str(data) == "s"):
+            data = data.lower()
+            if (data == "s" or data == 'sim' or data == 'si' or data == 'y'
+                            or data == 'yes'):
                 for chave in list(db):
                     del db[chave]
                 data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
@@ -280,7 +283,7 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         #
         # TO-DO
         #######################################################################
-        elif (descriptografar(data, chave_pub_cliente) == "7"):
+        elif (data == "7"):
             data = "Implementar SIGILO"
         
 
@@ -291,7 +294,7 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         #
         # TO-DO
         #######################################################################
-        elif (descriptografar(data, chave_pub_cliente) == "8"):
+        elif (data == "8"):
             data = "Implementar INTEGRIDADE"
 
 
@@ -310,7 +313,7 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Se tentar descriptografar com a chave publica do invasor, string
         # fica ilegivel
         #######################################################################
-        elif (descriptografar(data, chave_pub_cliente) == "9"):
+        elif (data == "9"):
             data = "Que mensagem quer enviar? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
@@ -444,6 +447,7 @@ def descriptografar (data, chave):
     data = funcoes_comuns.descripto_chave_assim(data, chave)
     data = funcoes_comuns.descripto_rot13(data)
     return data
+
 
 
 ###############################################################################
