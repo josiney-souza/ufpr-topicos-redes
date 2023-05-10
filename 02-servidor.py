@@ -133,15 +133,17 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Nessa ultima situacao, se desejar sobrescrever o item, usar a
         # opcao de atualizacao (opcao/menu 4)
         #######################################################################
-        if (str(data) == "1"):
+        if (descriptografar(data, chave_pub_cliente) == "1"):
             data = "Que chave inserir? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
+            data = descriptografar(data, chave_pub_cliente)
             chave = str(data)
             if (chave not in db):
                 data = "Qual será o valor? "
                 conn.send(data.encode())
                 data = conn.recv(1024).decode()
+                data = descriptografar(data, chave_pub_cliente)
                 valor=str(data)
                 db[chave] = valor
                 data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
@@ -163,10 +165,11 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Senao, busca pelo valor associado a chave no dicionario e retorna
         # o resultado para o cliente
         #######################################################################
-        elif (str(data) == "2"):
+        elif (descriptografar(data, chave_pub_cliente) == "2"):
             data = "Que valor consultar? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
+            data = descriptografar(data, chave_pub_cliente)
             if (str(data) not in db):
                 data = "### NÃO ENCONTRADO ###"
             else:
@@ -183,7 +186,7 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # string com todos os registros de chave-valor cadastrados,
         # retornando-a para o cliente
         #######################################################################
-        elif (str(data) == "3"):
+        elif (descriptografar(data, chave_pub_cliente) == "3"):
             data = envia_todo_banco(db)
 
 
@@ -201,10 +204,11 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Senao, obtem com o cliente o novo valor que deve ser atribuido a
         # chave escolhida e o atualiza no dicionario, informando o cliente
         #######################################################################
-        elif (str(data) == "4"):
+        elif (descriptografar(data, chave_pub_cliente) == "4"):
             data = "Que valor atualizar? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
+            data = descriptografar(data, chave_pub_cliente)
             chave = str(data)
             if (chave not in db):
                 data = "### NÃO ENCONTRADO ###"
@@ -212,6 +216,7 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
                 data = "Qual será o novo valor? "
                 conn.send(data.encode())
                 data = conn.recv(1024).decode()
+                data = descriptografar(data, chave_pub_cliente)
                 valor=str(data)
                 db[chave] = valor
                 data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
@@ -231,10 +236,11 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Senao, apaga a chave informada e, consequentemente, seu valor,
         # informando o cliente
         #######################################################################
-        elif (str(data) == "5"):
+        elif (descriptografar(data, chave_pub_cliente) == "5"):
             data = "Que valor apagar? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
+            data = descriptografar(data, chave_pub_cliente)
             chave = str(data)
             if (chave not in db):
                 data = "### NÃO ENCONTRADO ###"
@@ -254,10 +260,11 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         #
         # Senao, apenas informa que NADA foi alterado
         #######################################################################
-        elif (str(data) == "6"):
+        elif (descriptografar(data, chave_pub_cliente) == "6"):
             data = "Tem certeza? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
+            data = descriptografar(data, chave_pub_cliente)
             if (str(data) == "s"):
                 for chave in list(db):
                     del db[chave]
@@ -273,7 +280,7 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         #
         # TO-DO
         #######################################################################
-        elif (str(data) == "7"):
+        elif (descriptografar(data, chave_pub_cliente) == "7"):
             data = "Implementar SIGILO"
         
 
@@ -284,7 +291,7 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         #
         # TO-DO
         #######################################################################
-        elif (str(data) == "8"):
+        elif (descriptografar(data, chave_pub_cliente) == "8"):
             data = "Implementar INTEGRIDADE"
 
 
@@ -303,7 +310,7 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Se tentar descriptografar com a chave publica do invasor, string
         # fica ilegivel
         #######################################################################
-        elif (str(data) == "9"):
+        elif (descriptografar(data, chave_pub_cliente) == "9"):
             data = "Que mensagem quer enviar? "
             conn.send(data.encode())
             data = conn.recv(1024).decode()
@@ -414,6 +421,29 @@ def envia_todo_banco (db):
         str_unica = str_unica + str(chave) + ":" + str(valor) + '\n'
     return str_unica
 
+
+
+###############################################################################
+# Funcao descriptografar()
+###############################################################################
+# Parametro: uma string (data) e um inteiro (chave)
+###############################################################################
+# Retorno: uma string (data)
+###############################################################################
+#
+# Descriptografa a mensagem recebida atraves da string 'data' usando
+# primeiro a cifra de Cesar, depois com a chave publica do cliente e com
+# mais uma rodada da cifra de Cesar. Retorna o resultado, que eh uma string
+# com o dado originalmente enviado para este servidor
+#
+# Esta funcao eh usada em todos os locais em que se recebe uma mensagem de
+# um cliente
+###############################################################################
+def descriptografar (data, chave):
+    data = funcoes_comuns.descripto_rot13(data)
+    data = funcoes_comuns.descripto_chave_assim(data, chave)
+    data = funcoes_comuns.descripto_rot13(data)
+    return data
 
 
 ###############################################################################
