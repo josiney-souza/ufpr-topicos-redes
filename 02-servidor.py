@@ -46,9 +46,13 @@ import threading
 # especificamente dela, executando assim a funcao_thread()
 ###############################################################################
 def server_program():
-# Dicionario de exemplo que serve como base de dados inicial para as
+    # Dicionario de exemplo que serve como base de dados inicial para as
     # acoes de interacao entre cliente e servidor
-    db = dict(ark04=1, bcr04=2, dksy04=3, jos04=4, leg04=5, lhal04=6, rums04=7, sau04=8)
+    # Fonte: https://docs.python.org/3/tutorial/datastructures.html#dictionaries
+    db = dict(ark04="Alexander Robert Kutzke", bcr04="Bruno César Ribas",
+        dksy04="Danilo Kiyoshi Simizu Yorinori", jos04="Josiney de Souza",
+        leg04="Leonardo Gomes", lhal04="Luís Henrique Alves Lourenço",
+        rums04="Rubens Massayuki Suguimoto", sau04="Sérgio Akira Utime")
 
     # Variaveis para armazenar as chaves publicas dos clientes
     # Apenas as chaves publicas dos clientes sao armazenadas no servidor
