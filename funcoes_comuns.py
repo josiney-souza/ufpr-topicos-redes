@@ -76,6 +76,34 @@ def descripto_chave_assim (data, chave):
 
 
 
+###############################################################################
+# Funcao cripto_rot13()
+###############################################################################
+# Parametro: uma string (data)
+###############################################################################
+# Retorno: uma string (str_cripto_rot13)
+###############################################################################
+#
+# A partir do dados que serão transmitidos, representado pela string 'data',
+# criptografa a mensagem usado a cifra de Cesar (ROT13)
+#
+# A criptografia dos dados ocorre para cada caractere existente na string a
+# ser enviada, obtendo seu numero inteiro correspondente ao caractere da
+# tabela ASCII extendida (como no exemplo da imagem do link abaixo
+# https://qph.cf2.quoracdn.net/main-qimg-00fcff66ae3d83dd690135cc77ec0931-lq
+# Acesso em 10/05/2023), adiciona-se 13 a esse inteiro e se obtem o modulo
+# da divisao por 255 (para se obter numeros de 0 a 255 - maximo da tabela)
+#
+# Como se deseja apenas os caracteres imprimiveis, adiciona-se 32 ao
+# resultado se esse for abaixo de 32. Com o numero final obtido, constroi-se
+# a string final com o caractere correspondente apos a rotacao
+#
+# OBS.: diferente da codificacao encode(string, 'rot13') do modulo "codecs"
+# em Python (como em https://blog.finxter.com/how-to-use-rot13-in-python/,
+# acesso em 05/05/2023), esta funcao faz a rotacao de qualquer caractere
+# imprimivel e nao apenas dos textos alfanumericos simples da tabela ASCII
+# padrao
+###############################################################################
 def cripto_rot13 (data):
     str_cripto_rot13 = ""
     for pos in data:
@@ -86,6 +114,43 @@ def cripto_rot13 (data):
         str_cripto_rot13 = str_cripto_rot13 + chr(rot13)
     return str_cripto_rot13
 
+
+
+###############################################################################
+# Funcao descripto_rot13()
+###############################################################################
+# Parametro: uma string (data)
+###############################################################################
+# Retorno: uma string (str_descripto_rot13)
+###############################################################################
+#
+# A partir do dados que serão transmitidos, representado pela string 'data',
+# DEScriptografa a mensagem usado a cifra de Cesar (ROT13)
+#
+# A partir de cada caractere existente na string recebida, obtem um numero
+# inteiro correspondente ao caractere da tabela ASCII extendida (como no
+# exemplo da imagem do link abaixo
+# https://qph.cf2.quoracdn.net/main-qimg-00fcff66ae3d83dd690135cc77ec0931-lq
+# Acesso em 10/05/2023). Então, se esse numero for menor que 32+13, sendo 32
+# o primeiro caractere imprimivel e 13 a chave da cifra, significa que o
+# caractere original antes da codificacao estava no topo da tabela ASCII
+# (exemplo, 250) e sofreu um "overflow" apos a operacao de modulo 256
+#
+# Se esse for o caso, faz o caminho inverso da criptografia: subtrai-se 32
+# (valor usado para se chegar aos caracteres imprimiveis se abaixo de 32) e
+# se adicionar 256 (para voltar ao valor original apos a rotacao/adicao da
+# chave 13 durante a criptografia)
+#
+# Com o numero original apos a adicao da chave 13 na criptografia, apenas se
+# retira o valor da chave 13 para retornar ao inteiro da sequencia original.
+# A partir dai, constroi-se a string final e a retorna
+#
+# OBS.: diferente da codificacao encode(string, 'rot13') do modulo "codecs"
+# em Python (como em https://blog.finxter.com/how-to-use-rot13-in-python/,
+# acesso em 05/05/2023), esta funcao faz a rotacao de qualquer caractere
+# imprimivel e nao apenas dos textos alfanumericos simples da tabela ASCII
+# padrao
+###############################################################################
 def descripto_rot13 (data):
     str_descripto_rot13 = ""
     for pos in data:
