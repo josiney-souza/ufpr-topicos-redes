@@ -450,6 +450,14 @@ def descriptografar (data, chave):
 
 
 
+def criptografar (data, chave):
+    data = funcoes_comuns.cripto_rot13(data)
+    data = funcoes_comuns.cripto_chave_assim(data, chave)
+    data = funcoes_comuns.cripto_rot13(data)
+    return data
+
+
+
 ###############################################################################
 # Chamada da funcao que executada como principal
 ###############################################################################
