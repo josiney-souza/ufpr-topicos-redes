@@ -285,7 +285,36 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # Opcao 7: SIGILO
         #######################################################################
         #
-        # TO-DO
+        # MODO DEBUG ALINHADO COM O SERVIDOR
+        #
+        # Para demonstrar o sigilo das informacoes no envio dos dados ao
+        # cliente, primeiro criptografa uma mensagem; neste caso, toda a
+        # base de dados guardada no dicionário 'db'
+        #
+        # Depois, em modo debug, mostra a mensagem recem criptografada e
+        # tenta fazer a descriptografia. Primeiro, descriptografa com a
+        # cifra de Cesar, obtendo sucesso
+        #
+        # Segundo, tenta descriptografar a mensagem com a chave publica do
+        # invasor, nao conseguindo informacao util. Ainda no segundo passo,
+        # tenta a descriptografia agora com a chave publica do cliente,
+        # também sem sucesso
+        #
+        # Para efeitos demonstrativos apenas, pede ao cliente sua chave
+        # privada, a unica que consegue descriptografar os dados com
+        # sucesso. Mesmo nessa demonstração, como o cliente enviara a sua
+        # mensagem criptografada, o risco de exposição dos dados eh
+        # reduzido. Recebida a chave privada do cliente, mostra que eh
+        # possivel descriptografar a mensagem que seria enviada
+        #
+        # No ultimo passo demonstrativo, so falta fazer a descriptografia
+        # com a cifra de Cesar. Apos isso, exibe na tela a mensagem
+        # descriptografada "corretamente" (legivel, mas as quebras de linha
+        # - os \n - foram substituidos por '*' nas conversoes)
+        #
+        # Entre cada passado, devido ao carater demonstrativo desta opcao,
+        # foi inserido um "input()" para aguardar um comando do usuario
+        # antes de prosseguir
         #######################################################################
         elif (data == "7"):
             data = envia_todo_banco(db)
