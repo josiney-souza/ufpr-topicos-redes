@@ -486,6 +486,22 @@ def descriptografar (data, chave):
 
 
 
+###############################################################################
+# Funcao criptografar()
+###############################################################################
+# Parametro: uma string (data) e um inteiro (chave)
+###############################################################################
+# Retorno: uma string (data)
+###############################################################################
+#
+# Criptografa a mensagem que sera enviada ao cliente atraves da string
+# 'data' usando primeiro a cifra de Cesar, depois com a chave publica do
+# cliente e com # mais uma rodada da cifra de Cesar. Retorna o resultado,
+# que eh uma string com o dado criptografado que se deseja enviar
+#
+# Esta funcao eh destinada para uso em todos os locais em que se quer enviar
+# uma mensagem a um cliente
+###############################################################################
 def criptografar (data, chave):
     data = funcoes_comuns.cripto_rot13(data)
     data = funcoes_comuns.cripto_chave_assim(data, chave)
