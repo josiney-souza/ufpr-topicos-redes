@@ -284,7 +284,39 @@ def funcao_thread (conn, address, db, chave_pub_cliente, chave_pub_invasor):
         # TO-DO
         #######################################################################
         elif (data == "7"):
-            data = "Implementar SIGILO"
+            data = envia_todo_banco(db)
+            data = criptografar(data, chave_pub_cliente)
+            print("---> Mensagem criptografada:", data)
+            input()
+
+            data = funcoes_comuns.descripto_rot13(data)
+            print("|-----> (1) Mensagem descriptografada com ROT13:", data)
+            input()
+
+            cifra = funcoes_comuns.descripto_chave_assim(data, chave_pub_invasor)
+            print("|-----> (2) Mensagem descriptografada com chave invasor:", cifra)
+            input()
+
+            cifra = funcoes_comuns.descripto_chave_assim(data, chave_pub_cliente)
+            print("|-----> (2) Mensagem descriptografada com chave publica:", cifra)
+            input()
+
+            cifra = data
+            data = "[DEBUG] Qual sua chave privada? "
+            conn.send(data.encode())
+            data = conn.recv(1024).decode()
+            data = descriptografar(data, chave_pub_cliente)
+            data = int(data)
+
+            data = funcoes_comuns.descripto_chave_assim(cifra, data)
+            print("|-----> (2) Mensagem descriptografada com chave privada:", data)
+            input()
+
+            data = funcoes_comuns.descripto_rot13(data)
+            print("|-----> (3) Mensagem descriptografada com ROT13:", data)
+            print("###############################################################################")
+            print()
+            data = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
         
 
 
