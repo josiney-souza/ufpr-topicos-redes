@@ -101,7 +101,7 @@ def descripto_chave_assim (data, chave):
 # OBS.: diferente da codificacao encode(string, 'rot13') do modulo "codecs"
 # em Python (como em https://blog.finxter.com/how-to-use-rot13-in-python/,
 # acesso em 05/05/2023), esta funcao faz a rotacao de qualquer caractere
-# imprimivel e nao apenas dos textos alfanumericos simples da tabela ASCII
+# imprimivel e nao apenas dos textos alfabeticos simples da tabela ASCII
 # padrao
 ###############################################################################
 def cripto_rot13 (data):
@@ -148,7 +148,7 @@ def cripto_rot13 (data):
 # OBS.: diferente da codificacao encode(string, 'rot13') do modulo "codecs"
 # em Python (como em https://blog.finxter.com/how-to-use-rot13-in-python/,
 # acesso em 05/05/2023), esta funcao faz a rotacao de qualquer caractere
-# imprimivel e nao apenas dos textos alfanumericos simples da tabela ASCII
+# imprimivel e nao apenas dos textos alfabeticos simples da tabela ASCII
 # padrao
 ###############################################################################
 def descripto_rot13 (data):
