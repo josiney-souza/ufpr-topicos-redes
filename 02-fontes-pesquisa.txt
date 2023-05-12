@@ -1,0 +1,55 @@
+# Codigo de exemplo 1
+# https://snyk.io/blog/implementing-tls-ssl-python/
+# Acesso em: 10/05/2023
+#
+# Descobrindo como nao verificar o certificado por estar auto-assinado
+# https://stackoverflow.com/questions/64911257/ssl-certificate-verify-failed-certificate-verify-failed-in-python
+# Acesso em: 11/05/2023
+#
+###############################################################################
+#
+# Geracao de certificados e codigo de exemplo 2
+# https://snyk.io/blog/implementing-tls-ssl-python/
+# Acesso em: 10/05/2023
+#
+# Descobrindo o problema de chave publica
+# https://stackoverflow.com/questions/30109449/what-does-sslerror-ssl-pem-lib-ssl-c2532-mean-using-the-python-ssl-libr
+# Acesso em: 11/05/2023
+#
+# Adicionando a chave publica
+# https://anvileight.com/blog/posts/simple-python-http-server/
+# Acesso em: 11/05/2023
+#
+###############################################################################
+#
+# Codigo de exemplo 3
+# https://github.com/arthurazs/python-tls/blob/master/server.py
+# https://github.com/arthurazs/python-tls/blob/master/client.py
+# Acesso em: 11/05/2023
+#
+###############################################################################
+#
+# Geracao de certificado
+# https://www.howtouselinux.com/post/create-self-signed-certificate-with-openssl-command
+# Acesso em: 12/05/2023
+#
+###############################################################################
+#
+# Outros links
+# 
+# https://realpython.com/python-https/#what-is-https-like-in-the-real-world
+# https://docs.python.org/3/library/ssl.html#server-side-operation
+# Acesso em: 11/05/2023
+#
+# https://stackoverflow.com/questions/63226614/how-to-make-a-tls-connection-using-python
+# Acesso em: 11/05/2023
+# 
+# https://stackoverflow.com/questions/51390968/python-ssl-certificate-verify-error
+# https://stackoverflow.com/questions/64911257/ssl-certificate-verify-failed-certificate-verify-failed-in-python
+# https://discuss.python.org/t/ssl-certificate-verify-failed-certificate-verify-failed-self-signed-certificate/14359
+# https://www.howtouselinux.com/post/ssl-certificate_verify_failed-in-python
+# Acesso em: 12/05/2023
+#
+# https://stackoverflow.com/questions/57715289/how-to-fix-ssl-sslerror-ssl-wrong-version-number-wrong-version-number-ssl
+# https://stackoverflow.com/questions/65516325/ssl-wrong-version-number-on-python-request
+# Acesso em: 12/05/2023
