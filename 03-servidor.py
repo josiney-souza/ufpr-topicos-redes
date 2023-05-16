@@ -27,7 +27,7 @@ import confs_comuns
 # SOCK_STREAM: para se usar TCP
 socket_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 contexto = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-contexto.load_cert_chain(certfile="certificado.crt", keyfile="chave-privada.pem")
+contexto.load_cert_chain(certfile="cert-rsa.pem", keyfile="id_rsa")
 
 # Associa o endereco do servidor e a porta de uso com o socket
 socket_s.bind((confs_comuns.END_SERVIDOR, confs_comuns.PORTA))
