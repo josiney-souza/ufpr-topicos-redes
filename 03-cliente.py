@@ -32,14 +32,29 @@ socket_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Versao 1
 # Fonte: https://docs.python.org/3/library/ssl.html
 # Acesso em 12/05/2023
-contexto = ssl.create_default_context()
+# contexto = ssl.create_default_context()
 # Para nao verificar o hostname nem o certificado, o
 # "ssl._create_unverified_context()" eh equivalente a
 # "contexto.check_hostname = False" e "contexto.verify_mode = ssl.CERT_NONE"
-contexto.check_hostname = False
-contexto.verify_mode = ssl.CERT_NONE
-#contexto = ssl._create_unverified_context()
-socket_tls = contexto.wrap_socket(socket_s, server_hostname="josiney")
+# contexto.check_hostname = False
+# contexto.verify_mode = ssl.CERT_NONE
+# contexto = ssl._create_unverified_context()
+# socket_tls = contexto.wrap_socket(socket_s, server_hostname="josiney")
+#
+# Versao 2
+# Fonte: https://gist.github.com/Oborichkin/d8d0c7823fd6db3abeb25f69352a5299
+# Acesso em: 16/05/2023
+# socket_tls = ssl.wrap_socket(socket_s,
+# 		certfile="certificado.crt",
+# 		keyfile="chave-privada.pem")
+#
+# Versao 3
+# Fonte: https://vegibit.com/python-ssl-tutorial/
+# Acesso em: 16/05/2023
+contexto = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+contexto.load_verify_locations(cafile="cert-rsa.pem")
+contexto.check_hostname = True
+contexto.verify_mode = ssl.CERT_REQUIRED
 
 # Usa o socket para se conectar ao servidor
 socket_tls.connect((confs_comuns.END_SERVIDOR, confs_comuns.PORTA))
