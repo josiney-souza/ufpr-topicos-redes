@@ -27,7 +27,15 @@ import confs_comuns
 # SOCK_STREAM: para se usar TCP
 socket_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
+# Formas de uso do TLS/SSL:
+#
+# Versao 1
+# Fonte: https://docs.python.org/3/library/ssl.html
+# Acesso em 12/05/2023
 contexto = ssl.create_default_context()
+# Para nao verificar o hostname nem o certificado, o
+# "ssl._create_unverified_context()" eh equivalente a
+# "contexto.check_hostname = False" e "contexto.verify_mode = ssl.CERT_NONE"
 contexto.check_hostname = False
 contexto.verify_mode = ssl.CERT_NONE
 #contexto = ssl._create_unverified_context()
