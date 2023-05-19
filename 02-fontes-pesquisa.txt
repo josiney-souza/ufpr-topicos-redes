@@ -29,6 +29,12 @@
 #
 ###############################################################################
 #
+# Codigo de exemplo 4
+# Fonte: https://vegibit.com/python-ssl-tutorial/
+# Acesso em: 16/05/2023
+#
+###############################################################################
+#
 # Geracao de certificado
 # https://www.howtouselinux.com/post/create-self-signed-certificate-with-openssl-command
 # Acesso em: 12/05/2023
