@@ -60,24 +60,57 @@ socket_tls = contexto.wrap_socket(socket_s, server_hostname="localhost")
 # Usa o socket para se conectar ao servidor
 socket_tls.connect((confs_comuns.END_SERVIDOR, confs_comuns.PORTA))
 
-# Quando conectado, envia uma string ao servidor. Para enviar, eh necessario
-# codifica-la como bytes, por isso se usa a funcao "encode()"
-print("Enviando mensagem pré-definida ao servidor")
-socket_tls.send("Olá, servidor!".encode())
+# Mostra um simbolo de prompt no cliente e faz a captura de mensagem ou
+# comando para se enviar ao servidor
+dados = input(" -> ")
 
-# Aguarda pela mensagem de confirmação do servidor e a imprime. Como ela vem
-# codificada como bytes, eh necessario decodifica-la com a funcao "decode()"
-dados = socket_tls.recv(1024).decode()
-print("Recebido do servidor:", dados)
+###########################################################################
+# Laco principal de interacao com o servidor
+###########################################################################
+#
+# A partir da captura acima, envia a mensagem ou comando para o servidor
+#
+# Apos o envio, aguarda algum tipo de resposta do servidor para continuar
+#
+# Ao receber a resposta, a exibe na tela
+#
+# Entao obtem novos comandos ou mensagens para continuar a comunicacao
+# com o servidor
+#
+# Quando o cliente (este) enviar o comando '0', acabara o laco e a
+# conexao com o servidor sera fechada
+###########################################################################
+while dados.lower().strip() != '0':
+    # Envia mensagem/comando para o servidor
+    socket_tls.send(dados.encode())
+    # Aguarda uma resposta para poder prosseguir
+    dados = socket_tls.recv(1024).decode()
 
-# Obtem uma mensagem digitada pelo usuario e a envia ao servidor
-dados = "O que quer enviar?\n" + confs_comuns.PROMPT[1] + " "
-dados = input(dados)
-socket_tls.send(dados.encode())
+    print('*** Resposta do servidor: ' + dados)
 
-# Aguarda pela mensagem de confirmação do servidor e a imprime
-dados = socket_tls.recv(1024).decode()
-print("Recebido do servidor:", dados)
+    # Mostra um simbolo de prompt no cliente e faz a captura de mensagem ou
+    # comando para se enviar ao servidor
+    # De novo. Eh o incremento/passo indutivo para sair do laco
+    dados = input(" -> ")
+
+# # Quando conectado, envia uma string ao servidor. Para enviar, eh necessario
+# # codifica-la como bytes, por isso se usa a funcao "encode()"
+# print("Enviando mensagem pré-definida ao servidor")
+# socket_tls.send("Olá, servidor!".encode())
+
+# # Aguarda pela mensagem de confirmação do servidor e a imprime. Como ela vem
+# # codificada como bytes, eh necessario decodifica-la com a funcao "decode()"
+# dados = socket_tls.recv(1024).decode()
+# print("Recebido do servidor:", dados)
+
+# # Obtem uma mensagem digitada pelo usuario e a envia ao servidor
+# dados = "O que quer enviar?\n" + confs_comuns.PROMPT[1] + " "
+# dados = input(dados)
+# socket_tls.send(dados.encode())
+
+# # Aguarda pela mensagem de confirmação do servidor e a imprime
+# dados = socket_tls.recv(1024).decode()
+# print("Recebido do servidor:", dados)
 
 # Encerra a conexao com o servidor e finaliza
 socket_tls.close()
