@@ -102,6 +102,7 @@ socket_s.listen()
 
 # Depois de estar em modo de escuta, aceita as conexoes de clientes
 conexao, end_cliente = socket_s.accept()
+# Encapsula a conexao existente com TLS
 socket_tls = contexto.wrap_socket(conexao, server_side=True)
 
 # Mostra que um cliente se conectou e exibe seu endereco e porta contidos
@@ -261,6 +262,8 @@ while True:
 		else:
 			dados = "### BASE INALTERADA ###"
 
+
+
 	#######################################################################
 	# Opcao 0: Sair/Desconectar/Encerrar sessao
 	#######################################################################
@@ -286,36 +289,12 @@ while True:
 	else:
 		dados = envia_menu()
 
+
+
 	# Envia uma string 'dados' para o cliente solicitando informacoes
 	# adicionais, necessidade de confirmacao de algumas acoes, mensagens
 	# de status (sucesso ou erro) e/ou o retorno das acoes requisitadas
 	socket_tls.send(dados.encode())
 
-# # Recebe os dados enviados pelo cliente. Como ela vem codificada como
-# # bytes, eh necessario decodifica-la com a funcao "decode()"
-# dados = socket_tls.recv(1024).decode()
-
-# # Exibe a mensagem recebida do cliente
-# print(confs_comuns.MSG["docliente"], dados)
-
-# # Envia mensagem de confirmação para o cliente
-# dados = confs_comuns.RETORNOS["ack"]
-# socket_tls.send(dados.encode())
-
-# # Aguarda uma nova mensagem do cliente
-# dados = socket_tls.recv(1024).decode()
-
-# # Exibe a nova mensagem
-# print(confs_comuns.MSG["docliente"], dados)
-
-# # Envia mais uma confirmacao de recebimento da mensagem
-# dados = confs_comuns.RETORNOS["ack"]
-# socket_tls.send(dados.encode())
-
-# # Recebe a mensagem de fechamento da conexao do cliente e finaliza
-# dados = socket_tls.recv(1024).decode()
-# print(confs_comuns.MSG["fim"])
-
 # Encerra a conexao com o cliente
-#dados = conexao.recv()
 conexao.close()

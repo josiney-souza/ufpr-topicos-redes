@@ -93,24 +93,5 @@ while dados.lower().strip() != '0':
     # De novo. Eh o incremento/passo indutivo para sair do laco
     dados = input(" -> ")
 
-# # Quando conectado, envia uma string ao servidor. Para enviar, eh necessario
-# # codifica-la como bytes, por isso se usa a funcao "encode()"
-# print("Enviando mensagem pré-definida ao servidor")
-# socket_tls.send("Olá, servidor!".encode())
-
-# # Aguarda pela mensagem de confirmação do servidor e a imprime. Como ela vem
-# # codificada como bytes, eh necessario decodifica-la com a funcao "decode()"
-# dados = socket_tls.recv(1024).decode()
-# print("Recebido do servidor:", dados)
-
-# # Obtem uma mensagem digitada pelo usuario e a envia ao servidor
-# dados = "O que quer enviar?\n" + confs_comuns.PROMPT[1] + " "
-# dados = input(dados)
-# socket_tls.send(dados.encode())
-
-# # Aguarda pela mensagem de confirmação do servidor e a imprime
-# dados = socket_tls.recv(1024).decode()
-# print("Recebido do servidor:", dados)
-
 # Encerra a conexao com o servidor e finaliza
 socket_tls.close()
