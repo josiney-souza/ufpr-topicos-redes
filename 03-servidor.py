@@ -37,7 +37,7 @@ socket_s.listen()
 
 # Depois de estar em modo de escuta, aceita as conexoes de clientes
 conexao, end_cliente = socket_s.accept()
-constream = contexto.wrap_socket(conexao, server_side=True)
+socket_tls = contexto.wrap_socket(conexao, server_side=True)
 
 # Mostra que um cliente se conectou e exibe seu endereco e porta contidos
 # na variavel "end_cliente"
@@ -45,27 +45,27 @@ print(confs_comuns.MSG["clientecon"], end_cliente)
 
 # Recebe os dados enviados pelo cliente. Como ela vem codificada como
 # bytes, eh necessario decodifica-la com a funcao "decode()"
-dados = constream.recv(1024).decode()
+dados = socket_tls.recv(1024).decode()
 
 # Exibe a mensagem recebida do cliente
 print(confs_comuns.MSG["docliente"], dados)
 
 # Envia mensagem de confirmação para o cliente
 dados = confs_comuns.RETORNOS["ack"]
-constream.send(dados.encode())
+socket_tls.send(dados.encode())
 
 # Aguarda uma nova mensagem do cliente
-dados = constream.recv(1024).decode()
+dados = socket_tls.recv(1024).decode()
 
 # Exibe a nova mensagem
 print(confs_comuns.MSG["docliente"], dados)
 
 # Envia mais uma confirmacao de recebimento da mensagem
 dados = confs_comuns.RETORNOS["ack"]
-constream.send(dados.encode())
+socket_tls.send(dados.encode())
 
 # Recebe a mensagem de fechamento da conexao do cliente e finaliza
-dados = constream.recv(1024).decode()
+dados = socket_tls.recv(1024).decode()
 print(confs_comuns.MSG["fim"])
 
 # Encerra a conexao com o cliente
