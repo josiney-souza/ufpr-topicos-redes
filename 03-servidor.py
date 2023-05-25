@@ -44,6 +44,7 @@ def envia_menu():
 		' 4- [CRUD - U] Atualizar um valor\n',
 		' 5- [CRUD - D] Apagar um valor\n',
 		' 6- [CRUD - D] Apagar base de dados\n',
+		' 7- MOSTRAR SIGILO\n',
 		' ?- Ajuda\n',
 		' 0- Desconectar'
 	]
@@ -73,6 +74,30 @@ def envia_todo_banco (db):
 		valor=db[chave];
 		str_unica = str_unica + str(chave) + ":" + str(valor) + '\n'
 	return str_unica
+
+
+
+###############################################################################
+# Funcao criptografar()
+###############################################################################
+# Parametro: uma string (data) e um inteiro (chave)
+###############################################################################
+# Retorno: uma string (data)
+###############################################################################
+#
+# Criptografa a mensagem que sera enviada ao cliente atraves da string
+# 'data' usando primeiro a cifra de Cesar, depois com a chave publica do
+# cliente e com # mais uma rodada da cifra de Cesar. Retorna o resultado,
+# que eh uma string com o dado criptografado que se deseja enviar
+#
+# Esta funcao eh destinada para uso em todos os locais em que se quer enviar
+# uma mensagem a um cliente
+###############################################################################
+def criptografar (data, chave):
+	data = confs_comuns.cripto_rot13(data)
+	data = confs_comuns.cripto_chave_assim(data, chave)
+	data = confs_comuns.cripto_rot13(data)
+	return data
 
 
 
@@ -261,6 +286,81 @@ while True:
 			dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
 		else:
 			dados = "### BASE INALTERADA ###"
+
+
+
+	#######################################################################
+	# Opcao 7: MOSTRAR SIGILO
+	#######################################################################
+	#
+	# 
+	#
+	#######################################################################
+	elif (dados == "7"):
+		chave_pub_cliente = 401
+		chave_priv_cliente = 601
+
+		chave_pub_invasor = 191
+		chave_priv_invasor = 911
+
+		dados = envia_todo_banco(db)
+		dados_crip = criptografar(dados, chave_pub_cliente)
+		print("---> Simulando a criptografia antes do envio da mensagem para o cliente ...")
+		print("|-----> Criptografa usando a chave publica do cliente ...")
+		print("|-----> (0) Mensagem criptografada:\n", dados_crip)
+		input()
+
+		print("---> Simulando o cliente descriptgrafando a mensagem - rodada 1 ...")
+		sem_rot13 = confs_comuns.descripto_rot13(dados_crip)
+		print("|-----> (1) Mensagem descriptografada com ROT13:\n", sem_rot13)
+		input()
+
+		print("---> Simulando o cliente descriptografando a mensagem - rodada 2 ...")
+		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_pub_invasor, 1)
+		print("|-----> (2) Mensagem descriptografada com chave pub invasor (", chave_pub_invasor, "):\n", cifra)
+		input()
+
+		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_pub_cliente, 1)
+		print("|-----> (2) Mensagem descriptografada com chave publica cliente (", chave_pub_cliente, "):\n", cifra)
+		input()
+
+		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_invasor, 1)
+		print("|-----> (2) Mensagem descriptografada com chave priv invasor (", chave_priv_invasor, "):\n", cifra)
+		input()
+
+		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_cliente, 1)
+		print("|-----> (2) Mensagem descriptografada com chave privada cliente (", chave_priv_cliente, "):\n", cifra)
+		input()
+
+		print("---> Simulando o cliente descriptografando a mensagem - rodada 3 ...")
+		cifra = confs_comuns.descripto_rot13(cifra)
+		print("|-----> (3) Mensagem descriptografada com ROT13:\n", cifra)
+		print("###############################################################################")
+		print("---> Simulando a alteração da mensagem ...")
+		input()
+
+		print("---> Simulando o cliente descriptgrafando a mensagem - rodada 1 ...")
+		sem_rot13 = confs_comuns.descripto_rot13(dados_crip)
+		print("|-----> (1) Mensagem descriptografada com ROT13:\n", sem_rot13)
+		input()
+
+		print("|-----> (2) Mensagem sendo alterada...")
+		sem_rot13 = confs_comuns.alterar(sem_rot13)
+		# print("|-----> (2) Mensagem alterada nos indices ímpares:", sem_rot13)
+		print("|-----> (3) Mensagem alterada nos indices 1,3,5,7,9:\n", sem_rot13, "\nExecução finalizaria aqui...")
+		input()
+
+		print("|-----> (4) mas, se continuasse, assim seria...")
+		sem_rot13 = confs_comuns.descripto_rot13(dados_crip)
+		sem_rot13 = confs_comuns.alterar(sem_rot13)
+		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_cliente, 1)
+		print("|-----> (5) Mensagem descriptografada com chave privada cliente (", chave_priv_cliente, "):\n", cifra)
+		input()
+
+		print("---> Simulando o cliente descriptografando a mensagem - rodada 3 ...")
+		cifra = confs_comuns.descripto_rot13(cifra)
+		print("|-----> (6) Mensagem descriptografada com ROT13:\n", cifra)
+		print("###############################################################################\n")
 
 
 
