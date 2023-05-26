@@ -5,7 +5,10 @@ END_SERVIDOR = "127.0.0.1"
 PORTA = 8003
 
 # Prompts de interacao
-PROMPT = [ "#", "$", ">", "***", "###", "--->", "|----->"]
+PROMPT = dict ( root="# ",
+	user="$ ", 
+	cmd1="> ", 
+	cmd2=" -> ")
 
 # Prefixos e sufixos de mensagens de debug no servidor
 DEBUG = dict ( d0="***",
