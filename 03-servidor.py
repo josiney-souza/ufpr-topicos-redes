@@ -346,7 +346,6 @@ while True:
 
 		print("|-----> (2) Mensagem sendo alterada...")
 		sem_rot13 = confs_comuns.alterar(sem_rot13)
-		# print("|-----> (2) Mensagem alterada nos indices ímpares:", sem_rot13)
 		print("|-----> (3) Mensagem alterada nos indices 1,3,5,7,9:\n", sem_rot13, "\nExecução finalizaria aqui...")
 		input()
 

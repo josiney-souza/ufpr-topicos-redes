@@ -257,7 +257,6 @@ def alterar (dados):
 	str_alterada = ""
 
 	for pos in range(len(dados)):
-		# if (pos%2 == 1):
 		if (pos == 1 or pos == 3 or pos == 5 or pos == 7 or pos == 9):
 			str_alterada = str_alterada + "5"
 		else:
