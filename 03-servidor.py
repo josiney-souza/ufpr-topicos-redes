@@ -16,6 +16,8 @@ import socket
 import ssl
 # Adicao de modulo de funcoes e configuracoes comuns ao cliente e servidor
 import confs_comuns
+# Adicao do modulo para usar o relogio do sistema nos debugs (timestamp)
+import datetime
 
 
 
@@ -102,13 +104,16 @@ def criptografar (data, chave):
 
 
 ###############################################################################
+#
 # PROGRAMA PRINCIPAL
+#
 ###############################################################################
+
 # Dicionario de exemplo que serve como base de dados inicial para as
 # acoes de interacao entre cliente e servidor
 # Fonte: https://docs.python.org/3/tutorial/datastructures.html#dictionaries
-print(confs_comuns.DEBUG["d0"], "Carregando banco KVS",
-	confs_comuns.DEBUG["d0"])
+tempo = datetime.datetime.now()
+print(confs_comuns.DEBUG["d0"], tempo, "Carregando banco KVS")
 db = dict(ark04="Alexander Robert Kutzke", bcr04="Bruno César Ribas",
 	dksy04="Danilo Kiyoshi Simizu Yorinori", jos04="Josiney de Souza",
 	leg04="Leonardo Gomes", lhal04="Luís Henrique Alves Lourenço",
@@ -117,40 +122,46 @@ db = dict(ark04="Alexander Robert Kutzke", bcr04="Bruno César Ribas",
 # Criacao de um socket
 # AF_INET: para se usar IPv4
 # SOCK_STREAM: para se usar TCP
-print(confs_comuns.DEBUG["d0"], "Criando socket",
-	confs_comuns.DEBUG["d0"])
+tempo = datetime.datetime.now()
+print(confs_comuns.DEBUG["d0"], tempo, "Criando socket")
 socket_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print(confs_comuns.DEBUG["d0"], "Criando contexto TLS",
-	confs_comuns.DEBUG["d0"])
+
+# Criacao de contexto TLS
+tempo = datetime.datetime.now()
+print(confs_comuns.DEBUG["d0"], tempo, "Criando contexto TLS")
 contexto = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-print(confs_comuns.DEBUG["d0"], "Carregando credenciais",
-	confs_comuns.DEBUG["d0"])
+
+# Carregamento de credenciais TLS
+tempo = datetime.datetime.now()
+print(confs_comuns.DEBUG["d0"], tempo, "Carregando credenciais")
 contexto.load_cert_chain(certfile="cert-rsa.pem", keyfile="id_rsa")
 
 # Associa o endereco do servidor e a porta de uso com o socket
-print(confs_comuns.DEBUG["d0"], "Bind do endereço e da porta",
-	confs_comuns.DEBUG["d0"])
+tempo = datetime.datetime.now()
+print(confs_comuns.DEBUG["d0"], tempo, "Bind do endereço e da porta")
 socket_s.bind((confs_comuns.END_SERVIDOR, confs_comuns.PORTA))
 
 # Coloca o servidor em modo de escuta por conexoes
-print(confs_comuns.DEBUG["d0"],
-	"Servidor em modo de escuta aguardando conexões...",
-	confs_comuns.DEBUG["d0"])
+tempo = datetime.datetime.now()
+print(confs_comuns.DEBUG["d0"], tempo,
+	"Servidor em modo de escuta aguardando conexões")
 socket_s.listen()
 
 # Depois de estar em modo de escuta, aceita as conexoes de clientes
 conexao, end_cliente = socket_s.accept()
-print(confs_comuns.DEBUG["d0"], "Conexão de cliente aceita",
-	confs_comuns.DEBUG["d0"])
-# Encapsula a conexao existente com TLS
-print(confs_comuns.DEBUG["d0"], "Conexão encapsulada com TLS",
-	confs_comuns.DEBUG["d0"])
-socket_tls = contexto.wrap_socket(conexao, server_side=True)
+tempo = datetime.datetime.now()
+print(confs_comuns.DEBUG["d0"], tempo, "Conexão de cliente aceita")
 
 # Mostra que um cliente se conectou e exibe seu endereco e porta contidos
 # na variavel "end_cliente"
-print(confs_comuns.DEBUG["d0"], confs_comuns.MSG["clientecon"], end_cliente,
-	confs_comuns.DEBUG["d0"])
+tempo = datetime.datetime.now()
+print(confs_comuns.DEBUG["d0"], tempo, confs_comuns.MSG["clientecon"],
+	end_cliente)
+
+# Encapsula a conexao existente com TLS
+tempo = datetime.datetime.now()
+print(confs_comuns.DEBUG["d0"], tempo, "Encapsulando a conexão com TLS")
+socket_tls = contexto.wrap_socket(conexao, server_side=True)
 
 while True:
 	# Recebe os dados da comunicacao com o cliente
@@ -414,6 +425,6 @@ while True:
 	socket_tls.send(dados.encode())
 
 # Encerra a conexao com o cliente
-print(confs_comuns.DEBUG["d0"], confs_comuns.MSG["fim"],
-	confs_comuns.DEBUG["d0"])
+tempo = datetime.datetime.now()
+print(confs_comuns.DEBUG["d0"], tempo, confs_comuns.MSG["fim"])
 conexao.close()
