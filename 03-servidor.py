@@ -201,19 +201,34 @@ while True:
 	# opcao de atualizacao (opcao/menu 4)
 	#######################################################################
 	if (dados == "1"):
+		if (debug):
+			debugar("d1", "Opção 1 (inserir item) selecionada")
+
 		dados = "Que chave inserir? "
 		socket_tls.send(dados.encode())
 		dados = socket_tls.recv(1024).decode()
+		if (debug):
+			debugar("d1", "Chave a inserir:")
+			debugar("d2", dados)
+
 		chave = dados
 		if (chave not in db):
 			dados = "Qual será o valor? "
 			socket_tls.send(dados.encode())
 			dados = socket_tls.recv(1024).decode()
+			if (debug):
+				debugar("d1", "Valor a inserir:")
+				debugar("d2", dados)
+
 			valor= dados
 			db[chave] = valor
 			dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+			if (debug):
+				debugar("d3", confs_comuns.RETORNOS["ok"])
 		else:
 			dados = "### CHAVE JÁ EXISTE ###"
+			if (debug):
+				debugar("d3", confs_comuns.RETORNOS["jaexiste"])
 
 
 
@@ -231,13 +246,25 @@ while True:
 	# o resultado para o cliente
 	#######################################################################
 	elif (dados == "2"):
+		if (debug):
+			debugar("d1", "Opção 2 (consultar item) selecionada")
+
 		dados = "Que valor consultar? "
 		socket_tls.send(dados.encode())
 		dados = socket_tls.recv(1024).decode()
+		if (debug):
+			debugar("d1", "Valor a consultar:")
+			debugar("d2", dados)
+
 		if (dados not in db):
 			dados = "### NÃO ENCONTRADO ###"
+			if (debug):
+				debugar("d3", confs_comuns.RETORNOS["naoenc"])
 		else:
 			dados = db[dados]
+			if (debug):
+				debugar("d3", dados)
+				debugar("d3", confs_comuns.RETORNOS["ok"])
 
 
 
@@ -251,7 +278,13 @@ while True:
 	# retornando-a para o cliente
 	#######################################################################
 	elif (dados == "3"):
+		if (debug):
+			debugar("d1", "Opção 3 (consultar todos itens) selecionada")
+
 		dados = envia_todo_banco(db)
+		if (debug):
+				debugar("d2", dados)
+				debugar("d2", confs_comuns.RETORNOS["ok"])
 
 
 
@@ -269,19 +302,33 @@ while True:
 	# chave escolhida e o atualiza no dicionario, informando o cliente
 	#######################################################################
 	elif (dados == "4"):
+		if (debug):
+			debugar("d1", "Opção 4 (atualizar item) selecionada")
+
 		dados = "Que valor atualizar? "
 		socket_tls.send(dados.encode())
 		dados = socket_tls.recv(1024).decode()
+		if (debug):
+			debugar("d1", "Chave a atualizar:")
+			debugar("d2", dados)
+
 		chave = dados
 		if (chave not in db):
 			dados = "### NÃO ENCONTRADO ###"
+			if (debug):
+				debugar("d3", confs_comuns.RETORNOS["naoenc"])
 		else:
 			dados = "Qual será o novo valor? "
 			socket_tls.send(dados.encode())
 			dados = socket_tls.recv(1024).decode()
+			debugar("d1", "Valor a atualizar:")
+			debugar("d2", dados)
+
 			valor= dados
 			db[chave] = valor
 			dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+			if (debug):
+				debugar("d3", confs_comuns.RETORNOS["ok"])
 
 
 
@@ -299,15 +346,26 @@ while True:
 	# informando o cliente
 	#######################################################################
 	elif (dados == "5"):
+		if (debug):
+			debugar("d1", "Opção 5 (apagar item) selecionada")
+
 		dados = "Que valor apagar? "
 		socket_tls.send(dados.encode())
 		dados = socket_tls.recv(1024).decode()
+		if (debug):
+			debugar("d1", "Chave a apagar:")
+			debugar("d2", dados)
+
 		chave = dados
 		if (chave not in db):
 			dados = "### NÃO ENCONTRADO ###"
+			if (debug):
+				debugar("d3", confs_comuns.RETORNOS["naoenc"])
 		else:
 			del db[chave]
 			dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+			if (debug):
+				debugar("d3", confs_comuns.RETORNOS["ok"])
 
 
 
@@ -322,17 +380,28 @@ while True:
 	# Senao, apenas informa que NADA foi alterado
 	#######################################################################
 	elif (dados == "6"):
+		if (debug):
+			debugar("d1", "Opção 6 (apagar todos item) selecionada")
+
 		dados = "Tem certeza? "
 		socket_tls.send(dados.encode())
 		dados = socket_tls.recv(1024).decode()
+		if (debug):
+			debugar("d1", "Certeza?")
+			debugar("d2", dados)
+
 		dados = dados.lower()
 		if (dados == "s" or dados == 'sim' or dados == 'si' or dados == 'y'
 						or dados == 'yes'):
 			for chave in list(db):
 				del db[chave]
 			dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+			if (debug):
+				debugar("d3", confs_comuns.RETORNOS["ok"])
 		else:
 			dados = "### BASE INALTERADA ###"
+			if (debug):
+				debugar("d3", confs_comuns.RETORNOS["inalt"])
 
 
 
