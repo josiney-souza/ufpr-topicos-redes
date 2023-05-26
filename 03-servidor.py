@@ -104,6 +104,26 @@ def criptografar (data, chave):
 
 
 ###############################################################################
+# Funcao debugar()
+###############################################################################
+# Parametro: uma string (nivel) e outra string (dados)
+###############################################################################
+# Retorno: nada
+###############################################################################
+#
+# A partir de um nivel de debug ('nivel') e do que se quer registrar
+# ('dados'), escreve na tela uma mensagem de depuracao para poder se
+# acompanhar a execucao
+#
+# A mensagem eh acompanhada do tempo (timestamp) do relogio do sistema
+###############################################################################
+def debugar (nivel, dados):
+	tempo = datetime.datetime.now()
+	print(confs_comuns.DEBUG[nivel], tempo, dados)
+
+
+
+###############################################################################
 #
 # PROGRAMA PRINCIPAL
 #
@@ -122,45 +142,37 @@ db = dict(ark04="Alexander Robert Kutzke", bcr04="Bruno César Ribas",
 # Criacao de um socket
 # AF_INET: para se usar IPv4
 # SOCK_STREAM: para se usar TCP
-tempo = datetime.datetime.now()
-print(confs_comuns.DEBUG["d0"], tempo, "Criando socket")
+debugar("d0", "Criando socket")
 socket_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Criacao de contexto TLS
-tempo = datetime.datetime.now()
-print(confs_comuns.DEBUG["d0"], tempo, "Criando contexto TLS")
+debugar("d0", "Criando contexto TLS")
 contexto = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
 
 # Carregamento de credenciais TLS
-tempo = datetime.datetime.now()
-print(confs_comuns.DEBUG["d0"], tempo, "Carregando credenciais")
+debugar("d0", "Carregando credenciais")
 contexto.load_cert_chain(certfile="cert-rsa.pem", keyfile="id_rsa")
 
 # Associa o endereco do servidor e a porta de uso com o socket
-tempo = datetime.datetime.now()
-print(confs_comuns.DEBUG["d0"], tempo, "Bind do endereço e da porta")
+debugar("d0", "Bind do endereço e da porta")
 socket_s.bind((confs_comuns.END_SERVIDOR, confs_comuns.PORTA))
 
 # Coloca o servidor em modo de escuta por conexoes
-tempo = datetime.datetime.now()
-print(confs_comuns.DEBUG["d0"], tempo,
-	"Servidor em modo de escuta aguardando conexões")
+debugar("d0", "Servidor em modo de escuta aguardando conexões")
 socket_s.listen()
 
 # Depois de estar em modo de escuta, aceita as conexoes de clientes
 conexao, end_cliente = socket_s.accept()
-tempo = datetime.datetime.now()
-print(confs_comuns.DEBUG["d0"], tempo, "Conexão de cliente aceita")
+debugar("d0", "Conexão de cliente aceita")
 
 # Mostra que um cliente se conectou e exibe seu endereco e porta contidos
 # na variavel "end_cliente"
-tempo = datetime.datetime.now()
-print(confs_comuns.DEBUG["d0"], tempo, confs_comuns.MSG["clientecon"],
-	end_cliente)
+debugar("d0", confs_comuns.MSG["clientecon"])
+debugar("d1", "Endereço:"+str(end_cliente[0]))
+debugar("d1", "Porta:"+str(end_cliente[1]))
 
 # Encapsula a conexao existente com TLS
-tempo = datetime.datetime.now()
-print(confs_comuns.DEBUG["d0"], tempo, "Encapsulando a conexão com TLS")
+debugar("d0", "Encapsulando a conexão com TLS")
 socket_tls = contexto.wrap_socket(conexao, server_side=True)
 
 while True:
@@ -425,6 +437,5 @@ while True:
 	socket_tls.send(dados.encode())
 
 # Encerra a conexao com o cliente
-tempo = datetime.datetime.now()
-print(confs_comuns.DEBUG["d0"], tempo, confs_comuns.MSG["fim"])
+debugar("d0", confs_comuns.MSG["fim"])
 conexao.close()
