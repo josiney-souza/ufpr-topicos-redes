@@ -52,7 +52,7 @@ socket_s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Fonte: https://vegibit.com/python-ssl-tutorial/
 # Acesso em: 16/05/2023
 contexto = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
-contexto.load_verify_locations(cafile="cert-rsa.pem")
+# contexto.load_verify_locations(cafile="cert-rsa.pem")
 contexto.check_hostname = True
 contexto.verify_mode = ssl.CERT_REQUIRED
 socket_tls = contexto.wrap_socket(socket_s, server_hostname="localhost")
