@@ -139,7 +139,7 @@ def debugar (nivel, dados):
 # acoes de interacao entre cliente e servidor
 # Fonte: https://docs.python.org/3/tutorial/datastructures.html#dictionaries
 tempo = datetime.datetime.now()
-print(confs_comuns.DEBUG["d0"], tempo, "Carregando banco KVS")
+print(tempo, confs_comuns.DEBUG["d0"], "Carregando banco KVS")
 db = dict(ark04="Alexander Robert Kutzke", bcr04="Bruno César Ribas",
 	dksy04="Danilo Kiyoshi Simizu Yorinori", jos04="Josiney de Souza",
 	leg04="Leonardo Gomes", lhal04="Luís Henrique Alves Lourenço",
