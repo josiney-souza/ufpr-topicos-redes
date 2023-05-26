@@ -41,6 +41,12 @@
 #
 ###############################################################################
 #
+# Uso do relogio/horario do sistema para o debug/relatorio
+# https://www.geeksforgeeks.org/get-current-timestamp-using-python/
+# Acesso em: 26/05/2023
+#
+###############################################################################
+#
 # Outros links
 # 
 # https://realpython.com/python-https/#what-is-https-like-in-the-real-world
