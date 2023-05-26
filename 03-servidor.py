@@ -46,7 +46,7 @@ def envia_menu():
 		' 4- [CRUD - U] Atualizar um valor\n',
 		' 5- [CRUD - D] Apagar um valor\n',
 		' 6- [CRUD - D] Apagar base de dados\n',
-		' 7- MOSTRAR SIGILO\n',
+		' 7- Demonstrar INTEGRIDADE\n',
 		' ?- Ajuda\n',
 		' ad- Ativar depuração (debug)\n',
 		' dd- DESativar depuração (debug)\n',
@@ -118,6 +118,10 @@ def criptografar (data, chave):
 # acompanhar a execucao
 #
 # A mensagem eh acompanhada do tempo (timestamp) do relogio do sistema
+#
+# Referencia:
+# https://www.geeksforgeeks.org/get-current-timestamp-using-python/
+# Acesso em: 26/05/2023
 ###############################################################################
 def debugar (nivel, dados):
 	tempo = datetime.datetime.now()
@@ -418,10 +422,68 @@ while True:
 
 
 	#######################################################################
-	# Opcao 7: MOSTRAR SIGILO
+	# Opcao 7: Demonstrar INTEGRIDADE
 	#######################################################################
 	#
-	# 
+	# Mostra a integridade das mensagens que são tranmitidas com TLS. A
+	# demonstração é feita com a linha de raciocinio a seguir:
+	#
+	# (0.1) O cliente solicita um servico do servidor. Aqui representado por
+	# querer receber todos os registros do banco de dados
+	#
+	# (0.2) simula capturar a mensagem que sera enviada com TLS ao cliente,
+	# como se o cliente a tivesse recebido
+	# --- para isso, faz uma criptografia que eh a cifra de Cesar, seguida
+	# de uma criptografia usando multiplicacao na aritmetica modular com a
+	# chave publica do cliente e por ultimo mais uma cifra de Cesar
+	#
+	# (1) simula uma descriptografia com a cifra de Cesar
+	#
+	# (2) simula descriptografar usando o inverso multiplicativo da operacao
+	# de criptografia
+	# --- Assumindo que a chave publica de um invasor eh 191, tenta
+	# descriptografar SEM sucesso
+	# --- Assumindo que a chave publica de um cliente eh 401, tenta
+	# descriptografar SEM sucesso, pois essa foi a chave usada na
+	# criptografia e so pode ser descriptografada com a chave privada
+	# correspondente
+	# --- Assumindo que a chave privada de um invasor eh 911, tenta
+	# descriptografar SEM sucesso
+	# --- Assumindo que a chave privada de um cliente eh 601, essa eh a
+	# unica chave que consegue descriptografar COM sucesso
+	#
+	# (3) a partir de entao, simula mais um descriptografia com a cifra de
+	# Cesar, deixando os dados expostos e a mensagem pode ser lida por quem
+	# possui a chave privada correta
+	#
+	# OBS.: com esses passos, tambem eh possivel ver/demonstrar o sigilo
+	#
+	#######################################################################
+	#
+	# Depois disso, simula a alteracao ou corrompimento da mensagem. A
+	# seguinte linha de raciocinio eh usada:
+	#
+	# (1) A partir da mensagem que simula a criptografia com TLS, faz a
+	# descriptografia com a cifra de Cesar
+	#
+	# (2) Altera a mensagem nos caracteres dos indices 1, 3, 5, 7, 9 da
+	# mensagem, colocando valor "5" (53 da tabela ASCII) nessas posicoes de
+	# forma compulsoria, independente do seu valor original
+	#
+	# (3) Mostra como fica a mensagem alterada. Como o codigo verificador
+	# dos caracteres nao correspondem ao esperado (simulando alteracao ou
+	# corrompimento dos dados), o software deveria emitir uma mensagem de
+	# erro e finalizar a operacao SEM sucesso
+	#
+	# (4) Porem, se continuasse, os proximos passos seria realizar a
+	# descriptografia com a chave privada do cliente
+	#
+	# (5) e depois com a cifra de Cesar
+	#
+	# (6) para entao mostrar a mensagem exposta, porem corrompida. Essa
+	# mensagem tambem eh de fato enviada ao cliente na simulacao executada,
+	# podendo assim perceber que algo aconteceu e nao descriptografa
+	# corretamente
 	#
 	#######################################################################
 	elif (dados == "7"):
@@ -511,7 +573,7 @@ while True:
 	# Opcao ad: Ativar debug
 	#######################################################################
 	#
-	# 
+	# Ativa a depuracao/debug, usada tambem como relatorio de execucao
 	#
 	#######################################################################
 	elif (dados == "ad"):
@@ -525,7 +587,7 @@ while True:
 	# Opcao dd: DESativar debug
 	#######################################################################
 	#
-	# 
+	# Desativa o debug
 	#
 	#######################################################################
 	elif (dados == "dd"):
@@ -566,6 +628,8 @@ while True:
 	# adicionais, necessidade de confirmacao de algumas acoes, mensagens
 	# de status (sucesso ou erro) e/ou o retorno das acoes requisitadas
 	socket_tls.send(dados.encode())
+
+
 
 # Encerra a conexao com o cliente
 debugar("d0", confs_comuns.MSG["fim"])
