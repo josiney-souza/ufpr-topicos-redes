@@ -48,6 +48,8 @@ def envia_menu():
 		' 6- [CRUD - D] Apagar base de dados\n',
 		' 7- MOSTRAR SIGILO\n',
 		' ?- Ajuda\n',
+		' ad- Ativar depuração (debug)\n',
+		' dd- DESativar depuração (debug)\n',
 		' 0- Desconectar'
 	]
 	str_envio = ""
@@ -138,6 +140,10 @@ db = dict(ark04="Alexander Robert Kutzke", bcr04="Bruno César Ribas",
 	dksy04="Danilo Kiyoshi Simizu Yorinori", jos04="Josiney de Souza",
 	leg04="Leonardo Gomes", lhal04="Luís Henrique Alves Lourenço",
 	rums04="Rubens Massayuki Suguimoto", sau04="Sérgio Akira Utime")
+
+# Comeca sem debug para as funcoes normais do servidor
+# Caso o cliente deseje, pode ser alterado enviando mensagem de ativacao
+debug=False
 
 # Criacao de um socket
 # AF_INET: para se usar IPv4
@@ -401,6 +407,32 @@ while True:
 		cifra = confs_comuns.descripto_rot13(cifra)
 		print("|-----> (6) Mensagem descriptografada com ROT13:\n", cifra)
 		print("###############################################################################\n")
+
+
+
+	#######################################################################
+	# Opcao ad: Ativar debug
+	#######################################################################
+	#
+	# 
+	#
+	#######################################################################
+	elif (dados == "ad"):
+		debug=True
+		dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+
+
+
+	#######################################################################
+	# Opcao dd: DESativar debug
+	#######################################################################
+	#
+	# 
+	#
+	#######################################################################
+	elif (dados == "dd"):
+		debug=False
+		dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
 
 
 
