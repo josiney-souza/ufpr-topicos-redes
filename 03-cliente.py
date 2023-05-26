@@ -62,7 +62,7 @@ socket_tls.connect((confs_comuns.END_SERVIDOR, confs_comuns.PORTA))
 
 # Mostra um simbolo de prompt no cliente e faz a captura de mensagem ou
 # comando para se enviar ao servidor
-dados = input(" -> ")
+dados = input(confs_comuns.PROMPT["cmd1"])
 
 ###########################################################################
 # Laco principal de interacao com o servidor
@@ -91,7 +91,7 @@ while dados.lower().strip() != '0':
     # Mostra um simbolo de prompt no cliente e faz a captura de mensagem ou
     # comando para se enviar ao servidor
     # De novo. Eh o incremento/passo indutivo para sair do laco
-    dados = input(" -> ")
+    dados = input(confs_comuns.PROMPT["cmd1"])
 
 # Envia para o servidor a confirmação do encerramento
 socket_tls.send(dados.encode())
