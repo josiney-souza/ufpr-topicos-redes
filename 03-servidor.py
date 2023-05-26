@@ -316,19 +316,19 @@ while True:
 		input()
 
 		print("---> Simulando o cliente descriptografando a mensagem - rodada 2 ...")
-		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_pub_invasor, 1)
+		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_pub_invasor)
 		print("|-----> (2) Mensagem descriptografada com chave pub invasor (", chave_pub_invasor, "):\n", cifra)
 		input()
 
-		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_pub_cliente, 1)
+		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_pub_cliente)
 		print("|-----> (2) Mensagem descriptografada com chave publica cliente (", chave_pub_cliente, "):\n", cifra)
 		input()
 
-		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_invasor, 1)
+		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_invasor)
 		print("|-----> (2) Mensagem descriptografada com chave priv invasor (", chave_priv_invasor, "):\n", cifra)
 		input()
 
-		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_cliente, 1)
+		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_cliente)
 		print("|-----> (2) Mensagem descriptografada com chave privada cliente (", chave_priv_cliente, "):\n", cifra)
 		input()
 
@@ -353,7 +353,7 @@ while True:
 		print("|-----> (4) mas, se continuasse, assim seria...")
 		sem_rot13 = confs_comuns.descripto_rot13(dados_crip)
 		sem_rot13 = confs_comuns.alterar(sem_rot13)
-		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_cliente, 1)
+		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_cliente)
 		print("|-----> (5) Mensagem descriptografada com chave privada cliente (", chave_priv_cliente, "):\n", cifra)
 		input()
 
