@@ -11,7 +11,7 @@ PROMPT = dict ( root="# ",
 	cmd2=" -> ")
 
 # Prefixos e sufixos de mensagens de debug no servidor
-DEBUG = dict ( d0="***",
+DEBUG = dict ( d0="*",
 	d1="--->",
 	d2="|----->",
 	d3="|-------->" )
