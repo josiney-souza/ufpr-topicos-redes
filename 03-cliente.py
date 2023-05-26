@@ -93,5 +93,10 @@ while dados.lower().strip() != '0':
     # De novo. Eh o incremento/passo indutivo para sair do laco
     dados = input(" -> ")
 
+# Envia para o servidor a confirmação do encerramento
+socket_tls.send(dados.encode())
+# Aguarda o OK do servidor para encerrar em definitivo
+dados = socket_tls.recv(1024).decode()
+
 # Encerra a conexao com o servidor e finaliza
 socket_tls.close()
