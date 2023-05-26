@@ -27,6 +27,7 @@ RETORNOS = dict ( ack="### MENSAGEM RECEBIDA ###",
 # Mensagens de exibicao no proprio servidor
 MSG = dict ( clientecon="Cliente conectado:",
 	docliente="Recebido do cliente:",
+	fimsecao="########################################",
 	fim="Encerrando o servidor" )
 
 

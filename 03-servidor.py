@@ -143,7 +143,7 @@ db = dict(ark04="Alexander Robert Kutzke", bcr04="Bruno César Ribas",
 
 # Comeca sem debug para as funcoes normais do servidor
 # Caso o cliente deseje, pode ser alterado enviando mensagem de ativacao
-debug=False
+debug=True
 
 # Criacao de um socket
 # AF_INET: para se usar IPv4
@@ -230,6 +230,8 @@ while True:
 			if (debug):
 				debugar("d3", confs_comuns.RETORNOS["jaexiste"])
 
+		debugar("d1", confs_comuns.MSG["fimsecao"])
+
 
 
 	#######################################################################
@@ -266,6 +268,8 @@ while True:
 				debugar("d3", dados)
 				debugar("d3", confs_comuns.RETORNOS["ok"])
 
+		debugar("d1", confs_comuns.MSG["fimsecao"])
+
 
 
 	#######################################################################
@@ -285,6 +289,8 @@ while True:
 		if (debug):
 				debugar("d2", dados)
 				debugar("d2", confs_comuns.RETORNOS["ok"])
+
+		debugar("d1", confs_comuns.MSG["fimsecao"])
 
 
 
@@ -330,6 +336,8 @@ while True:
 			if (debug):
 				debugar("d3", confs_comuns.RETORNOS["ok"])
 
+		debugar("d1", confs_comuns.MSG["fimsecao"])
+
 
 
 	#######################################################################
@@ -367,6 +375,8 @@ while True:
 			if (debug):
 				debugar("d3", confs_comuns.RETORNOS["ok"])
 
+		debugar("d1", confs_comuns.MSG["fimsecao"])
+
 
 
 	#######################################################################
@@ -402,6 +412,8 @@ while True:
 			dados = "### BASE INALTERADA ###"
 			if (debug):
 				debugar("d3", confs_comuns.RETORNOS["inalt"])
+
+		debugar("d1", confs_comuns.MSG["fimsecao"])
 
 
 
@@ -459,7 +471,7 @@ while True:
 		debugar("d3", "(3) Mensagem descriptografada com ROT13:")
 		debugar("d4", cifra)
 
-		debugar("d1", "###############################################################################")
+		debugar("d1", confs_comuns.MSG["fimsecao"])
 
 		debugar("d1", "Simulando a alteração da mensagem")
 		input()
@@ -489,7 +501,7 @@ while True:
 		cifra = confs_comuns.descripto_rot13(cifra)
 		debugar("d3", "(6) Mensagem descriptografada com ROT13:")
 		debugar("d4", cifra)
-		debugar("d1", "###############################################################################")
+		debugar("d1", confs_comuns.MSG["fimsecao"])
 
 
 
