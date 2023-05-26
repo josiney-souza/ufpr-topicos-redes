@@ -79,7 +79,7 @@ def envia_todo_banco (db):
 	for chave in db:
 		valor=db[chave];
 		str_unica = str_unica + str(chave) + ":" + str(valor) + '\n'
-	return str_unica
+	return str_unica[:-1]
 
 
 
@@ -218,8 +218,8 @@ while True:
 		socket_tls.send(dados.encode())
 		dados = socket_tls.recv(1024).decode()
 		if (debug):
-			debugar("d1", "Chave a inserir:")
-			debugar("d2", dados)
+			debugar("d2", "Chave a inserir:")
+			debugar("d3", dados)
 
 		chave = dados
 		if (chave not in db):
@@ -227,20 +227,21 @@ while True:
 			socket_tls.send(dados.encode())
 			dados = socket_tls.recv(1024).decode()
 			if (debug):
-				debugar("d1", "Valor a inserir:")
-				debugar("d2", dados)
+				debugar("d2", "Valor a inserir:")
+				debugar("d3", dados)
 
 			valor= dados
 			db[chave] = valor
-			dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+			dados = confs_comuns.RETORNOS["ok"]
 			if (debug):
-				debugar("d3", confs_comuns.RETORNOS["ok"])
+				debugar("d4", dados)
 		else:
-			dados = "### CHAVE JÁ EXISTE ###"
+			dados = confs_comuns.RETORNOS["jaexiste"]
 			if (debug):
-				debugar("d3", confs_comuns.RETORNOS["jaexiste"])
+				debugar("d4", dados)
 
-		debugar("d1", confs_comuns.MSG["fimsecao"])
+		if (debug):
+			debugar("d2", confs_comuns.MSG["fimsecao"])
 
 
 
@@ -265,20 +266,21 @@ while True:
 		socket_tls.send(dados.encode())
 		dados = socket_tls.recv(1024).decode()
 		if (debug):
-			debugar("d1", "Valor a consultar:")
-			debugar("d2", dados)
+			debugar("d2", "Valor a consultar:")
+			debugar("d3", dados)
 
 		if (dados not in db):
-			dados = "### NÃO ENCONTRADO ###"
+			dados = confs_comuns.RETORNOS["naoenc"]
 			if (debug):
-				debugar("d3", confs_comuns.RETORNOS["naoenc"])
+				debugar("d4", dados)
 		else:
 			dados = db[dados]
 			if (debug):
-				debugar("d3", dados)
-				debugar("d3", confs_comuns.RETORNOS["ok"])
+				debugar("d4", dados)
+				debugar("d4", confs_comuns.RETORNOS["ok"])
 
-		debugar("d1", confs_comuns.MSG["fimsecao"])
+		if (debug):
+			debugar("d2", confs_comuns.MSG["fimsecao"])
 
 
 
@@ -298,9 +300,10 @@ while True:
 		dados = envia_todo_banco(db)
 		if (debug):
 				debugar("d2", dados)
-				debugar("d2", confs_comuns.RETORNOS["ok"])
+				debugar("d3", confs_comuns.RETORNOS["ok"])
 
-		debugar("d1", confs_comuns.MSG["fimsecao"])
+		if (debug):
+			debugar("d2", confs_comuns.MSG["fimsecao"])
 
 
 
@@ -330,23 +333,23 @@ while True:
 
 		chave = dados
 		if (chave not in db):
-			dados = "### NÃO ENCONTRADO ###"
+			dados = confs_comuns.RETORNOS["naoenc"]
 			if (debug):
-				debugar("d3", confs_comuns.RETORNOS["naoenc"])
+				debugar("d3", dados)
 		else:
 			dados = "Qual será o novo valor? "
 			socket_tls.send(dados.encode())
 			dados = socket_tls.recv(1024).decode()
-			debugar("d1", "Valor a atualizar:")
-			debugar("d2", dados)
-
-			valor= dados
-			db[chave] = valor
-			dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
 			if (debug):
-				debugar("d3", confs_comuns.RETORNOS["ok"])
+				debugar("d1", "Valor a atualizar:")
+				debugar("d2", dados)
+			db[chave] = dados
+			dados = confs_comuns.RETORNOS["ok"]
+			if (debug):
+				debugar("d3", dados)
 
-		debugar("d1", confs_comuns.MSG["fimsecao"])
+		if (debug):
+			debugar("d2", confs_comuns.MSG["fimsecao"])
 
 
 
@@ -371,21 +374,22 @@ while True:
 		socket_tls.send(dados.encode())
 		dados = socket_tls.recv(1024).decode()
 		if (debug):
-			debugar("d1", "Chave a apagar:")
-			debugar("d2", dados)
+			debugar("d2", "Chave a apagar:")
+			debugar("d3", dados)
 
 		chave = dados
 		if (chave not in db):
-			dados = "### NÃO ENCONTRADO ###"
+			dados = confs_comuns.RETORNOS["naoenc"]
 			if (debug):
-				debugar("d3", confs_comuns.RETORNOS["naoenc"])
+				debugar("d4", dados)
 		else:
 			del db[chave]
-			dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+			dados = confs_comuns.RETORNOS["ok"]
 			if (debug):
-				debugar("d3", confs_comuns.RETORNOS["ok"])
+				debugar("d4", dados)
 
-		debugar("d1", confs_comuns.MSG["fimsecao"])
+		if (debug):
+			debugar("d2", confs_comuns.MSG["fimsecao"])
 
 
 
@@ -407,23 +411,24 @@ while True:
 		socket_tls.send(dados.encode())
 		dados = socket_tls.recv(1024).decode()
 		if (debug):
-			debugar("d1", "Certeza?")
-			debugar("d2", dados)
+			debugar("d2", "Certeza?")
+			debugar("d3", dados)
 
 		dados = dados.lower()
 		if (dados == "s" or dados == 'sim' or dados == 'si' or dados == 'y'
 						or dados == 'yes'):
 			for chave in list(db):
 				del db[chave]
-			dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+			dados = confs_comuns.RETORNOS["ok"]
 			if (debug):
-				debugar("d3", confs_comuns.RETORNOS["ok"])
+				debugar("d4", dados)
 		else:
-			dados = "### BASE INALTERADA ###"
+			dados = confs_comuns.RETORNOS["inalt"]
 			if (debug):
-				debugar("d3", confs_comuns.RETORNOS["inalt"])
+				debugar("d4", dados)
 
-		debugar("d1", confs_comuns.MSG["fimsecao"])
+		if (debug):
+			debugar("d2", confs_comuns.MSG["fimsecao"])
 
 
 
@@ -539,7 +544,7 @@ while True:
 		debugar("d3", "(3) Mensagem descriptografada com ROT13:")
 		debugar("d4", cifra)
 
-		debugar("d1", confs_comuns.MSG["fimsecao"])
+		debugar("d2", confs_comuns.MSG["fimsecao"])
 
 		debugar("d1", "Simulando a alteração da mensagem")
 		input()
@@ -569,7 +574,7 @@ while True:
 		cifra = confs_comuns.descripto_rot13(cifra)
 		debugar("d3", "(6) Mensagem descriptografada com ROT13:")
 		debugar("d4", cifra)
-		debugar("d1", confs_comuns.MSG["fimsecao"])
+		debugar("d2", confs_comuns.MSG["fimsecao"])
 
 		dados = cifra
 
@@ -584,8 +589,9 @@ while True:
 	#######################################################################
 	elif (dados == "ad"):
 		debug=True
-		dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+		dados = confs_comuns.RETORNOS["ok"]
 		debugar("d1", "Depuração ATIVADA")
+		debugar("d2", confs_comuns.MSG["fimsecao"])
 
 
 
@@ -598,8 +604,9 @@ while True:
 	#######################################################################
 	elif (dados == "dd"):
 		debug=False
-		dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+		dados = confs_comuns.RETORNOS["ok"]
 		debugar("d1", "Depuração DESativada")
+		debugar("d2", confs_comuns.MSG["fimsecao"])
 
 
 
