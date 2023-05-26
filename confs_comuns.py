@@ -7,6 +7,12 @@ PORTA = 8003
 # Prompts de interacao
 PROMPT = [ "#", "$", ">", "***", "###", "--->", "|----->"]
 
+# Prefixos e sufixos de mensagens de debug no servidor
+DEBUG = dict ( d0="***",
+	d1="--->",
+	d2="|----->",
+	d3="|-------->" )
+
 # Mensagens de retorno do servidor para o cliente
 RETORNOS = dict ( ack="### MENSAGEM RECEBIDA ###",
 	ok="### OPERAÇÃO REALIZADA COM SUCESSO ###",
