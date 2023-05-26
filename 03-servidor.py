@@ -503,6 +503,8 @@ while True:
 		debugar("d4", cifra)
 		debugar("d1", confs_comuns.MSG["fimsecao"])
 
+		dados = cifra
+
 
 
 	#######################################################################
