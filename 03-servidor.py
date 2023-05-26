@@ -121,7 +121,7 @@ def criptografar (data, chave):
 ###############################################################################
 def debugar (nivel, dados):
 	tempo = datetime.datetime.now()
-	print(confs_comuns.DEBUG[nivel], tempo, dados)
+	print(tempo, confs_comuns.DEBUG[nivel], dados)
 
 
 
