@@ -233,3 +233,34 @@ def descripto_rot13 (dados):
 		rot13 = rot13 - 13
 		str_descripto_rot13 = str_descripto_rot13 + chr(rot13)
 	return str_descripto_rot13
+
+
+
+###############################################################################
+# Funcao alterar_mensagem()
+###############################################################################
+# Parametro: uma string (dados)
+###############################################################################
+# Retorno: uma string (str_alterada)
+###############################################################################
+#
+# Para cada caractere contido na mensagem recebida ('dados'), copia-os para
+# uma nova string. A única excecao eh para os caracteres das posicoes 1, 3,
+# 5, 7 e 9; que sao alterados compulsoriamente para o caractere '5' (decimal
+# 53 na tabela ASCII). Ao final, retorna a string alterada ('str_alterada')
+#
+# Essa excecao eh para simular um corrompimento ou alteracao proposital da
+# mensagem que o servidor envia ao cliente
+###############################################################################
+def alterar (dados):
+	pos = 0
+	str_alterada = ""
+
+	for pos in range(len(dados)):
+		# if (pos%2 == 1):
+		if (pos == 1 or pos == 3 or pos == 5 or pos == 7 or pos == 9):
+			str_alterada = str_alterada + "5"
+		else:
+			str_alterada = str_alterada + dados[pos]
+
+	return str_alterada
