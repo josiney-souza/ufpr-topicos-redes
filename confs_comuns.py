@@ -1,3 +1,6 @@
+# Arquivo de log da execucao normal
+LOG_EXEC = "log-execucao.txt"
+
 # Endereco do servidor (deve ser string)
 END_SERVIDOR = "127.0.0.1"
 

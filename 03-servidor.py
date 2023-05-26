@@ -18,6 +18,8 @@ import ssl
 import confs_comuns
 # Adicao do modulo para usar o relogio do sistema nos debugs (timestamp)
 import datetime
+# Adicao do modulo de sistema para conseguir abrir e usar arquivos
+import sys
 
 
 
@@ -126,6 +128,7 @@ def criptografar (data, chave):
 def debugar (nivel, dados):
 	tempo = datetime.datetime.now()
 	print(tempo, confs_comuns.DEBUG[nivel], dados)
+	print(tempo, confs_comuns.DEBUG[nivel], dados, file=arquivo_log)
 
 
 
@@ -134,6 +137,9 @@ def debugar (nivel, dados):
 # PROGRAMA PRINCIPAL
 #
 ###############################################################################
+
+# Abre o arquivo de log para escrita
+arquivo_log = open(confs_comuns.LOG_EXEC, 'w')
 
 # Dicionario de exemplo que serve como base de dados inicial para as
 # acoes de interacao entre cliente e servidor
@@ -634,3 +640,6 @@ while True:
 # Encerra a conexao com o cliente
 debugar("d0", confs_comuns.MSG["fim"])
 conexao.close()
+
+# Fecha o arquivo de log para salvar todas as escritas realizadas
+arquivo_log.close()
