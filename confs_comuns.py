@@ -14,7 +14,8 @@ PROMPT = dict ( root="# ",
 DEBUG = dict ( d0="*",
 	d1="--->",
 	d2="|----->",
-	d3="|-------->" )
+	d3="|-------->",
+	d4="|----------->" )
 
 # Mensagens de retorno do servidor para o cliente
 RETORNOS = dict ( ack="### MENSAGEM RECEBIDA ###",

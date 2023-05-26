@@ -421,61 +421,75 @@ while True:
 
 		dados = envia_todo_banco(db)
 		dados_crip = criptografar(dados, chave_pub_cliente)
-		print("---> Simulando a criptografia antes do envio da mensagem para o cliente ...")
-		print("|-----> Criptografa usando a chave publica do cliente ...")
-		print("|-----> (0) Mensagem criptografada:\n", dados_crip)
+		debugar("d1", "Simulando a criptografia antes do envio da mensagem para o cliente")
+		debugar("d2", "Criptografa usando a chave publica do cliente")
+		debugar("d3", "(0) Mensagem criptografada:")
+		debugar("d4", dados_crip)
 		input()
 
-		print("---> Simulando o cliente descriptgrafando a mensagem - rodada 1 ...")
+		debugar("d2", "Simulando o cliente descriptgrafando a mensagem - rodada 1")
+		debugar("d3", "(1) Mensagem descriptografada com ROT13:")
 		sem_rot13 = confs_comuns.descripto_rot13(dados_crip)
-		print("|-----> (1) Mensagem descriptografada com ROT13:\n", sem_rot13)
+		debugar("d4", sem_rot13)
 		input()
 
-		print("---> Simulando o cliente descriptografando a mensagem - rodada 2 ...")
+		debugar("d2", "Simulando o cliente descriptografando a mensagem - rodada 2")
+		debugar("d3", "(2) Mensagem descriptografada com chave pub invasor:")
 		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_pub_invasor)
-		print("|-----> (2) Mensagem descriptografada com chave pub invasor (", chave_pub_invasor, "):\n", cifra)
+		debugar("d4", cifra)
 		input()
 
+		debugar("d3", "(2) Mensagem descriptografada com chave publica cliente:")
 		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_pub_cliente)
-		print("|-----> (2) Mensagem descriptografada com chave publica cliente (", chave_pub_cliente, "):\n", cifra)
+		debugar("d4", cifra)
 		input()
 
+		debugar("d3", "(2) Mensagem descriptografada com chave priv invasor:")
 		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_invasor)
-		print("|-----> (2) Mensagem descriptografada com chave priv invasor (", chave_priv_invasor, "):\n", cifra)
+		debugar("d4", cifra)
 		input()
 
+		debugar("d3", "(2) Mensagem descriptografada com chave privada cliente:")
 		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_cliente)
-		print("|-----> (2) Mensagem descriptografada com chave privada cliente (", chave_priv_cliente, "):\n", cifra)
+		debugar("d4", cifra)
 		input()
 
-		print("---> Simulando o cliente descriptografando a mensagem - rodada 3 ...")
+		debugar("d2", "Simulando o cliente descriptografando a mensagem - rodada 3")
 		cifra = confs_comuns.descripto_rot13(cifra)
-		print("|-----> (3) Mensagem descriptografada com ROT13:\n", cifra)
-		print("###############################################################################")
-		print("---> Simulando a alteração da mensagem ...")
+		debugar("d3", "(3) Mensagem descriptografada com ROT13:")
+		debugar("d4", cifra)
+
+		debugar("d1", "###############################################################################")
+
+		debugar("d1", "Simulando a alteração da mensagem")
 		input()
 
-		print("---> Simulando o cliente descriptgrafando a mensagem - rodada 1 ...")
+		debugar("d2", "Simulando o cliente descriptgrafando a mensagem - rodada 1")
+		debugar("d3", "(1) Mensagem descriptografada com ROT13:")
 		sem_rot13 = confs_comuns.descripto_rot13(dados_crip)
-		print("|-----> (1) Mensagem descriptografada com ROT13:\n", sem_rot13)
+		debugar("d4", sem_rot13)
 		input()
 
-		print("|-----> (2) Mensagem sendo alterada...")
+		debugar("d2", "(2) Mensagem sendo alterada")
 		sem_rot13 = confs_comuns.alterar(sem_rot13)
-		print("|-----> (3) Mensagem alterada nos indices 1,3,5,7,9:\n", sem_rot13, "\nExecução finalizaria aqui...")
+		debugar("d3", "(3) Mensagem alterada nos indices 1,3,5,7,9:")
+		debugar("d4", sem_rot13)
+		debugar("d2", "Execução finalizaria aqui")
 		input()
 
-		print("|-----> (4) mas, se continuasse, assim seria...")
+		debugar("d2", "(4) mas, se continuasse, assim seria...")
 		sem_rot13 = confs_comuns.descripto_rot13(dados_crip)
 		sem_rot13 = confs_comuns.alterar(sem_rot13)
 		cifra = confs_comuns.descripto_chave_assim(sem_rot13, chave_priv_cliente)
-		print("|-----> (5) Mensagem descriptografada com chave privada cliente (", chave_priv_cliente, "):\n", cifra)
+		debugar("d3", "(5) Mensagem descriptografada com chave privada cliente:")
+		debugar("d4", cifra)
 		input()
 
-		print("---> Simulando o cliente descriptografando a mensagem - rodada 3 ...")
+		debugar("d2", "Simulando o cliente descriptografando a mensagem - rodada 3")
 		cifra = confs_comuns.descripto_rot13(cifra)
-		print("|-----> (6) Mensagem descriptografada com ROT13:\n", cifra)
-		print("###############################################################################\n")
+		debugar("d3", "(6) Mensagem descriptografada com ROT13:")
+		debugar("d4", cifra)
+		debugar("d1", "###############################################################################")
 
 
 
@@ -489,6 +503,7 @@ while True:
 	elif (dados == "ad"):
 		debug=True
 		dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+		debugar("d1", "Depuração ATIVADA")
 
 
 
@@ -502,6 +517,7 @@ while True:
 	elif (dados == "dd"):
 		debug=False
 		dados = "### OPERAÇÃO REALIZADA COM SUCESSO ###\n"
+		debugar("d1", "Depuração DESativada")
 
 
 
