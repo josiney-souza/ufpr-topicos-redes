@@ -47,6 +47,12 @@
 #
 ###############################################################################
 #
+# Abertura de arquivos para escrita
+# https://stackoverflow.com/questions/7152762/how-to-redirect-print-output-to-a-file
+# Acesso em: 26/05/2023
+#
+###############################################################################
+#
 # Outros links
 # 
 # https://realpython.com/python-https/#what-is-https-like-in-the-real-world
