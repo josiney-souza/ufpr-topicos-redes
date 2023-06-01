@@ -1,5 +1,5 @@
 # Josiney de Souza
-# 02-cliente.py
+# 02-invasor.py
 #
 # Trabalho 2 do componente curricular Topicos em Redes de Computadores
 # (INFO-7065) do Programa de Pos-Graduacao em Informatica (40001016034P5)
