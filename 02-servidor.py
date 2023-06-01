@@ -144,8 +144,7 @@ arquivo_log = open(confs_comuns.LOG_EXEC, 'w')
 # Dicionario de exemplo que serve como base de dados inicial para as
 # acoes de interacao entre cliente e servidor
 # Fonte: https://docs.python.org/3/tutorial/datastructures.html#dictionaries
-tempo = datetime.datetime.now()
-print(tempo, confs_comuns.DEBUG["d0"], "Carregando banco KVS")
+debugar("d0", "Carregando banco KVS")
 db = dict(ark04="Alexander Robert Kutzke", bcr04="Bruno César Ribas",
 	dksy04="Danilo Kiyoshi Simizu Yorinori", jos04="Josiney de Souza",
 	leg04="Leonardo Gomes", lhal04="Luís Henrique Alves Lourenço",
