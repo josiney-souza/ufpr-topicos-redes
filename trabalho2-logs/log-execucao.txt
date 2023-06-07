@@ -1,0 +1,5 @@
+2023-06-01 16:44:30.051361 * Carregando banco KVS
+2023-06-01 16:44:30.051412 * Criando socket
+2023-06-01 16:44:30.051448 * Criando contexto TLS
+2023-06-01 16:44:30.052913 * Carregando credenciais
+2023-06-01 16:44:30.053111 * Bind do endereço e da porta

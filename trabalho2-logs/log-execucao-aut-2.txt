@@ -1,0 +1,10 @@
+2023-05-30 11:57:52.937330 * Criando socket
+2023-05-30 11:57:52.937383 * Criando contexto TLS
+2023-05-30 11:57:52.938789 * Carregando credenciais
+2023-05-30 11:57:52.938966 * Bind do endereço e da porta
+2023-05-30 11:57:52.938999 * Servidor em modo de escuta aguardando conexões
+2023-05-30 11:58:01.289074 * Conexão de cliente aceita
+2023-05-30 11:58:01.289134 * Cliente conectado:
+2023-05-30 11:58:01.289147 ---> Endereço:127.0.0.1
+2023-05-30 11:58:01.289161 ---> Porta:33120
+2023-05-30 11:58:01.289174 * Encapsulando a conexão com TLS
