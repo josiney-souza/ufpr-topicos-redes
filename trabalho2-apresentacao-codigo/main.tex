@@ -1,0 +1,241 @@
+\documentclass[xcolor=dvipsnames,table]{beamer}
+\useinnertheme{rounded}
+\useoutertheme{infolines}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{multicol}
+
+\title{Aplicação cliente-servidor baseada em KVS com TLS\\ Código-fonte}
+\subtitle{Tópicos em Redes de Computadores (INFO-7065)}
+\author{Josiney de Souza (josiney.souza@ifc.edu.br)}
+\institute{UFPR / DInf}
+\date{\today}
+
+%%% Apagar barra de navegacao:
+% https://stackoverflow.com/questions/3210205/how-to-get-rid-of-navigation-bars-in-beamer
+% https://stackoverflow.com/questions/1435837/how-to-remove-footers-of-latex-beamer-templates
+\beamertemplatenavigationsymbolsempty
+%%% Remover o titulo, autor e data do rodape:
+% https://tex.stackexchange.com/questions/113443/remove-author-and-institution-in-footline
+\beamertemplatefootempty
+
+%%% Cores das fontes:
+% https://en.wikibooks.org/wiki/LaTeX/Colors
+\definecolor{ifvermelho}{RGB}{200,12,15}
+\definecolor{ifverde}{HTML}{2F9E41}
+% Mais cores feitas com http://coolors.co
+\definecolor{ifvermelho2}{HTML}{B60B0E} % Nome: International Orange Engineering
+\definecolor{ifvermelho3}{HTML}{A50A0D} % Nome: Rufous
+\definecolor{ifmeioesq}{HTML}{A2311C} % Nome: Chinese Red
+\definecolor{ifmeio}{HTML}{7C5528} % Nome: Coyote Brown
+\definecolor{ifmeiodir}{HTML}{567A35} % Nome: Sap Green
+\definecolor{ifverde2}{HTML}{42A752} % Nome: Green Pigment
+\definecolor{ifverde3}{HTML}{53AF62} % Nome: Medium Sea Green
+
+% https://tex.stackexchange.com/questions/133820/beamer-how-to-change-color-of-infolines-and-frame-title
+\setbeamercolor{title}{fg=Red}
+\setbeamercolor{frametitle}{fg=Red}
+\setbeamercolor{section in head/foot}{fg=White,bg=ifvermelho}
+\setbeamercolor{subsection in head/foot}{fg=ifverde}
+
+%%% Cores das caixas de block, exemplo e alerta
+% https://tex.stackexchange.com/questions/33231/how-to-change-the-color-of-a-block-within-a-custom-beamer-sty-theme-file
+\setbeamercolor{block title}{fg=White,bg=ifverde2}
+\setbeamercolor{block body}{fg=White,bg=ifverde3}
+% https://tex.stackexchange.com/questions/73163/change-color-scheme-for-example-box-in-beamer
+\setbeamercolor{block title example}{fg=White,bg=ifmeio}
+\setbeamercolor{block body example}{fg=White,bg=ifmeiodir}
+% https://tex.stackexchange.com/questions/96686/change-color-of-itemize-in-beamer-alertblock
+\setbeamercolor{block title alerted}{fg=White,bg=ifvermelho3}
+\setbeamercolor{block body alerted}{fg=White,bg=ifvermelho2}
+
+%%% Mostrar o sumario novamente antes do inicio da proxima secao
+% https://pt.overleaf.com/learn/latex/beamer
+\AtBeginSection[]
+{\small
+  \begin{frame}[plain]
+    \frametitle{Sumário}
+    \tableofcontents[currentsection]
+%	\begin{multicols}{2}
+%	\tableofcontents[currentsection]
+%	\end{multicols}
+  \end{frame}
+}
+
+%%% Plano de fundo usado no modelo ODT/DOC/DOCX da Cecom
+\usebackgroundtemplate%
+{%
+    \includegraphics[width=\paperwidth,height=\paperheight]{fundo.jpg}%
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% Início do documento %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%% Primeira página do modelo abaixo - PODE SER REMOVIDA, SE DESEJAR %%%%%
+%%% Centralizando o titulo da primeira pagina
+% https://stackoverflow.com/questions/2365539/centering-titles-when-using-the-beamer-class-in-latex
+%%% Removendo as formatacoes do slide
+% https://tex.stackexchange.com/questions/281334/left-aligned-title-page-in-beamer-boadilla-usetheme
+%{
+%\usebackgroundtemplate%
+%{%
+%    \includegraphics[width=\paperwidth,height=\paperheight]{primeira-pag-menor.jpg}%
+%}
+%\begin{frame}[plain]{\centerline{\inserttitle}}
+%\end{frame}
+%}
+%%%%% Primeira página do modelo acima - PODE SER REMOVIDA, SE DESEJAR %%%%%
+
+\begin{frame}[plain]{}
+    \maketitle
+\end{frame}
+
+{\small
+\begin{frame}[plain]{Sumário}
+    \tableofcontents
+%	\begin{multicols}{2}
+%	\tableofcontents
+%	\end{multicols}
+\end{frame}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introdução}
+\subsection{A especificação do trabalho}
+\begin{frame}{A especificação do trabalho}
+	Esta é a segunda avaliação de 2023/1 de Tópicos em Redes de Computadores:
+	\begin{itemize}
+		\item Fazer uma aplicação cliente/servidor
+		\item Baseada em KVS (Key-Value Store)
+		\item Usar TLS (Transport Layer Security)
+		\item Demonstrar SIGILO
+		\item Demonstrar AUTENTICIDADE
+		\item Demonstrar INTEGRIDADE
+	\end{itemize}
+	Página do componente curricular (disciplina/matéria): \url{https://www.inf.ufpr.br/elias/topredes/}
+\end{frame}
+
+\begin{frame}{Entrega}
+	O formato de entrega do trabalho:
+	\begin{description}
+		\item[Relatório:] pode ser vídeo, apresentação ou relatório em texto;
+		\begin{itemize}
+			\item Optei por vídeo
+			\item Outro vídeo com a execução do sistema e comentários
+			\item \url{https://youtu.be/rB0gSziJ0dI}
+		\end{itemize} \pause
+		
+		\item[\textit{Logs} de execução:] via demonstrações no vídeo ou \textit{logs} em uma página \textit{web};
+		\begin{itemize}
+			\item Optei por ambos
+			\item Outro vídeo com a execução do sistema e comentários
+			\item \url{https://youtu.be/rB0gSziJ0dI}
+			\item Página: \url{https://www.inf.ufpr.br/jsouza/}
+		\end{itemize} \pause
+		
+		\item[Código comentado:] entrega do código comentado
+		\begin{itemize}
+			\item \textbf{Este vídeo}
+			\item Página: \url{https://www.inf.ufpr.br/jsouza/}
+			\item GitHub: \url{https://github.com/josiney-souza/ufpr-topicos-redes}
+		\end{itemize}
+	\end{description}
+	Entrega por e-mail
+\end{frame}
+
+\subsection{A organização do sistema/aplicação}
+\begin{frame}{A organização do sistema/aplicação}
+	O sistema está assim organizado - \textbf{códigos}:
+	\begin{description}
+		\item[Linguagem:] Python
+		\item[02-cliente.py:] aplicação cliente - entra em contato com o servidor para solicitar serviços ou recursos;
+		\item[02-servidor.py:] aplicação servidor - recebe as demandas dos clientes e retorna alguma ação;
+		\item[02-invasor.py:] aplicação cliente não autorizada a se comunicar com o servidor;
+		\item[confs\_comuns.py:] biblioteca pessoal de funções e configurações comuns aos clientes e ao servidor.
+	\end{description}
+\end{frame}
+
+%\begin{frame}{}
+%	T
+%\end{frame}
+
+\section{confs\_comuns.py}
+\begin{frame}{confs\_comuns.py}
+	Dividido em:
+	\begin{itemize}
+		\item Variáveis globais de configurações
+		\item Funções:
+		\begin{itemize}
+			\item cripto\_chave\_assim()
+			\item descripto\_chave\_assim()
+			\item cripto\_rot13()
+			\item descripto\_rot13()
+			\item alterar()
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{02-servidor.py}
+\begin{frame}{02-servidor.py}
+	Dividido em:
+	\begin{itemize}
+		\item Funções:
+		\begin{itemize}
+			\item envia\_menu()
+			\item envia\_todo\_banco()
+			\item criptografar()
+			\item debugar()
+		\end{itemize}
+		\item Prepara a conexão
+		\item Interage com o cliente
+	\end{itemize}
+\end{frame}
+
+\section{02-cliente.py}
+\begin{frame}{02-cliente.py}
+	Dividido em:
+	\begin{itemize}
+		\item Prepara a conexão
+		\item Interage com o servidor
+	\end{itemize}
+\end{frame}
+
+\section{02-invasor.py}
+\begin{frame}{02-invasor.py}
+	Praticamente o mesmo código do cliente.
+
+	Dividido em:
+	\begin{itemize}
+		\item Prepara a conexão
+		\begin{itemize}
+			\item Ou não carrega certificados;
+			\item Ou carrega certificados errados.
+		\end{itemize}
+		\item TENTA interagir com o servidor
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[plain]{}
+    \maketitle
+\end{frame}
+
+%\section{Códifo-fonte}
+
+%%%%% Última página do modelo abaixo - PODE SER REMOVIDA, SE DESEJAR %%%%%
+%{
+%\usebackgroundtemplate%
+%{%
+%    \includegraphics[width=\paperwidth,height=\paperheight]{ultima-pag-menor.jpg}%
+%}
+%\begin{frame}[plain]{}
+%\end{frame}
+%}
+%%%%% Última página do modelo acima - PODE SER REMOVIDA, SE DESEJAR %%%%%
+	
+\end{document}
