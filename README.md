@@ -20,6 +20,10 @@ Os arquivos do trabalho 2 são:
 - [02-invasor.py](02-invasor.py): código-fonte Python do servidor do sistema
 - [confs_comuns.py](confs_comuns.py): biblioteca pessoal de variáveis, configurações e funções comuns ao servidor, cliente e invasor
 
+Para ver a apresentação/entrega do trabalho, há [este vídeo do YouTube](https://youtu.be/rB0gSziJ0dI).
+
+Para assistir à explicação dos códigos-fonte, há [este outro vídeo do YouTube](https://youtu.be/rygg8rVnA3o).
+
 Os demais diretórios existentes com a mesma nomenclatura são:
 - [trabalho2-apresentacao-funcionamento](trabalho2-apresentacao-funcionamento): arquivos da apresentação de *slides* do funcionamento do sistema cliente/servidor com KVS e TLS
 - [trabalho2-apresentacao-codigo](trabalho2-apresentacao-codigo): arquivos da apresentação de *slides* da explicação dos códigos-fontes do sistema cliente/servidor com KVS e TLS
